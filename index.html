@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYRON - Redefiniendo la Elegancia | Moda de Lujo Premium</title>
+    <meta name="description" content="Descubre ZYRON, la marca de moda de lujo que redefine la elegancia. Colección exclusiva de ropa premium para hombres y mujeres sofisticados.">
+    <meta name="keywords" content="moda de lujo, ropa premium, elegancia, sofisticación, marca exclusiva, fashion luxury">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-black: #0a0a0a;
+            --soft-black: #1a1a1a;
+            --pure-white: #ffffff;
+            --soft-gray: #f5f5f5;
+            --medium-gray: #888888;
+            --light-gray: #e5e5e5;
+            --gold-accent: #d4af37;
+            --silver-accent: #c0c0c0;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            color: var(--primary-black);
+            background: var(--pure-white);
+            overflow-x: hidden;
+        }
+        
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            color: var(--gold-accent);
+            transform: scale(1.02);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--primary-black);
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary-black);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f5f5f5" width="1200" height="800"/><rect fill="%23e8e8e8" x="100" y="100" width="1000" height="600" rx="20"/><circle fill="%23d4af37" cx="600" cy="400" r="150" opacity="0.1"/><text x="600" y="420" font-family="serif" font-size="48" text-anchor="middle" fill="%23333">ELEGANCIA</text></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(212, 175, 55, 0.1));
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 700;
+            color: var(--pure-white);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gold-accent);
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-radius: 2px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .cta-button:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Productos Destacados */
+        .featured-products {
+            padding: 8rem 2rem;
+            background: var(--pure-white);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-black);
+            font-weight: 600;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .product-card {
+            background: var(--pure-white);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 400px;
+            background: var(--soft-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--gold-accent), var(--silver-accent));
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        .product-info {
+            padding: 2rem;
+        }
+        
+        .product-name {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+        }
+        
+        .product-description {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold-accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .buy-button {
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-black);
+            color: var(--pure-white);
+            border: none;
+            border-radius: 2px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        
+        .buy-button:hover {
+            background: var(--soft-black);
+            transform: translateY(-1px);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 8rem 2rem;
+            background: var(--soft-gray);
+        }
+        
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--primary-black);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .value-item {
+            background: var(--pure-white);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .value-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gold-accent);
+        }
+        
+        .value-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+        
+        /* Collection Gallery */
+        .collection {
+            padding: 8rem 2rem;
+            background: var(--pure-white);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--light-gray);
+            color: var(--medium-gray);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--gold-accent);
+            border-color: var(--gold-accent);
+            color: var(--pure-white);
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .collection-item {
+            background: var(--pure-white);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .collection-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .collection-image {
+            width: 100%;
+            height: 350px;
+            background: var(--soft-gray);
+            position: relative;
+        }
+        
+        .collection-image::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--gold-accent);
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        
+        .collection-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .collection-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+        }
+        
+        .collection-price {
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 2rem;
+            background: var(--primary-black);
+            color: var(--pure-white);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--gold-accent);
+        }
+        
+        .testimonial-role {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--soft-black);
+            color: var(--pure-white);
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold-accent);
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: var(--gold-accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--gold-accent);
+            transform: translateY(-2px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--pure-white);
+            border-radius: 4px;
+        }
+        
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .newsletter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--gold-accent);
+            color: var(--pure-white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-btn:hover {
+            background: #b8941f;
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Cart */
+        .cart {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--pure-white);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .cart.open {
+            right: 0;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .products-grid,
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="#" class="logo">ZYRON</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#coleccion" class="nav-link">Colección</a></li>
+                    <li><a href="#nosotros" class="nav-link">Sobre Nosotros</a></li>
+                    <li><a href="#tienda" class="nav-link">Tienda</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1 class="hero-title">Redefiniendo la Elegancia</h1>
+            <p class="hero-subtitle">Donde la sofisticación encuentra la modernidad</p>
+            <a href="#coleccion" class="cta-button">Ver Colección</a>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section class="featured-products" id="tienda">
+        <div class="container">
+            <h2 class="section-title">Piezas Exclusivas</h2>
+            <p class="section-subtitle">Explora cada pieza de nuestra exclusiva colección</p>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todo</button>
+                <button class="filter-btn" data-filter="hombre">Hombre</button>
+                <button class="filter-btn" data-filter="mujer">Mujer</button>
+                <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+                <button class="filter-btn" data-filter="formal">Formal</button>
+            </div>
+            
+            <div class="collection-grid">
+                <div class="collection-item" data-category="hombre formal">
+                    <div class="collection-image" alt="Traje Ejecutivo ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Traje Ejecutivo</h4>
+                        <div class="collection-price">€1,890</div>
+                    </div>
+                </div>
+                
+                <div class="collection-item" data-category="mujer formal">
+                    <div class="collection-image" alt="Conjunto Boardroom ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Conjunto Boardroom</h4>
+                        <div class="collection-price">€1,560</div>
+                    </div>
+                </div>
+                
+                <div class="collection-item" data-category="hombre">
+                    <div class="collection-image" alt="Jersey Cashmere ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Jersey Cashmere</h4>
+                        <div class="collection-price">€750</div>
+                    </div>
+                </div>
+                
+                <div class="collection-item" data-category="mujer">
+                    <div class="collection-image" alt="Blusa Silk ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Blusa Silk</h4>
+                        <div class="collection-price">€520</div>
+                    </div>
+                </div>
+                
+                <div class="collection-item" data-category="accesorios">
+                    <div class="collection-image" alt="Cinturón Leather ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Cinturón Signature</h4>
+                        <div class="collection-price">€280</div>
+                    </div>
+                </div>
+                
+                <div class="collection-item" data-category="accesorios">
+                    <div class="collection-image" alt="Bolso Premium ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Bolso Executive</h4>
+                        <div class="collection-price">€1,200</div>
+                    </div>
+                </div>
+                
+                <div class="collection-item" data-category="hombre">
+                    <div class="collection-image" alt="Polo Premium ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Polo Elite</h4>
+                        <div class="collection-price">€320</div>
+                    </div>
+                </div>
+                
+                <div class="collection-item" data-category="mujer">
+                    <div class="collection-image" alt="Falda Midi ZYRON"></div>
+                    <div class="collection-info">
+                        <h4 class="collection-name">Falda Couture</h4>
+                        <div class="collection-price">€480</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Lo Que Dicen Nuestros Clientes</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.7);">Testimonios de quienes viven la experiencia ZYRON</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "ZYRON ha redefinido completamente mi guardarropa. Cada pieza es una obra de arte que transmite 
+                        elegancia y sofisticación. La calidad es incomparable."
+                    </p>
+                    <div class="testimonial-author">Isabella Montenegro</div>
+                    <div class="testimonial-role">CEO, Montenegro Group</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Como coleccionista de moda de lujo, puedo afirmar que ZYRON está al nivel de las grandes 
+                        casas europeas. Artesanía impecable y diseño visionario."
+                    </p>
+                    <div class="testimonial-author">Alessandro Rinaldi</div>
+                    <div class="testimonial-role">Fashion Critic, Vogue Italia</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Cada evento importante requiere una pieza ZYRON. Es la marca que eligen aquellos que entienden 
+                        la verdadera exclusividad y el lujo discreto."
+                    </p>
+                    <div class="testimonial-author">Victoria Ashworth</div>
+                    <div class="testimonial-role">Editora de Moda, Harper's Bazaar</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "ZYRON representa todo lo que busco en moda de lujo: atemporalidad, calidad excepcional 
+                        y un diseño que habla por sí mismo sin necesidad de logos ostentosos."
+                    </p>
+                    <div class="testimonial-author">Marcus Sterling</div>
+                    <div class="testimonial-role">Empresario y Filántropo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ZYRON</h3>
+                <p>
+                    Redefiniendo la elegancia desde 2020. Comprometidos con la excelencia, 
+                    la artesanía y la sofisticación en cada pieza que creamos.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Showroom Principal<br>
+                Passeig de Gràcia, 85<br>
+                08008 Barcelona, España</p>
+                <p>+34 93 215 0847<br>
+                info@zyron.luxury</p>
+                <p>Lunes a Sábado: 10:00 - 20:00<br>
+                Domingo: 12:00 - 18:00</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <p><a href="#">Atención Personal</a></p>
+                <p><a href="#">Sastrería a Medida</a></p>
+                <p><a href="#">Envío Internacional</a></p>
+                <p><a href="#">Programa de Lealtad</a></p>
+                <p><a href="#">Cuidado de Prendas</a></p>
+                <p><a href="#">Devoluciones VIP</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter Exclusivo</h3>
+                <p>Sé el primero en conocer nuestras nuevas colecciones y eventos privados.</p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Tu email" required>
+                    <button type="submit" class="newsletter-btn">Suscribir</button>
+                </form>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255,255,255,0.6);">
+                    Al suscribirte aceptas nuestra 
+                    <a href="#" style="color: var(--gold-accent);">Política de Privacidad</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 ZYRON. Todos los derechos reservados. | 
+            <a href="#" style="color: rgba(255,255,255,0.6);">Términos de Uso</a> | 
+            <a href="#" style="color: rgba(255,255,255,0.6);">Política de Privacidad</a> | 
+            <a href="#" style="color: rgba(255,255,255,0.6);">Cookies</a></p>
+        </div>
+    </footer>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" onclick="closeCart()"></div>
+    
+    <!-- Shopping Cart -->
+    <div class="cart" id="cart">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h3 style="font-family: var(--font-serif); color: var(--primary-black);">Mi Carrito</h3>
+            <button onclick="closeCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        </div>
+        
+        <div id="cart-items">
+            <p style="text-align: center; color: var(--medium-gray); margin-top: 3rem;">
+                Tu carrito está vacío<br>
+                <small>Explora nuestra colección exclusiva</small>
+            </p>
+        </div>
+        
+        <div id="cart-total" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--light-gray); display: none;">
+            <div style="display: flex; justify-content: space-between; font-weight: 600; font-size: 1.2rem;">
+                <span>Total: </span>
+                <span id="total-amount">€0</span>
+            </div>
+            <button style="width: 100%; margin-top: 1.5rem; padding: 1rem; background: var(--gold-accent); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;" onclick="checkout()">
+                Proceder al Pago
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Collection Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const collectionItems = document.querySelectorAll('.collection-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                collectionItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category').includes(filter)) {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeInUp 0.6s ease-out';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Shopping Cart
+        let cart = [];
+        let cartTotal = 0;
+
+        const products = {
+            'blazer-signature': { name: 'Blazer Signature', price: 1250 },
+            'vestido-midnight': { name: 'Vestido Midnight', price: 980 },
+            'camisa-elite': { name: 'Camisa Elite', price: 450 },
+            'abrigo-heritage': { name: 'Abrigo Heritage', price: 2100 },
+            'pantalon-couture': { name: 'Pantalón Couture', price: 680 },
+            'vestido-gala': { name: 'Vestido Gala', price: 1850 }
+        };
+
+        function addToCart(productId) {
+            const product = products[productId];
+            if (product) {
+                cart.push({ id: productId, ...product });
+                updateCartUI();
+                showNotification(`${product.name} agregado al carrito`);
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const totalAmount = document.getElementById('total-amount');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <p style="text-align: center; color: var(--medium-gray); margin-top: 3rem;">
+                        Tu carrito está vacío<br>
+                        <small>Explora nuestra colección exclusiva</small>
+                    </p>
+                `;
+                cartTotal.style.display = 'none';
+            } else {
+                let total = 0;
+                cartItems.innerHTML = cart.map((item, index) => {
+                    total += item.price;
+                    return `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--light-gray);">
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem;">${item.name}</h4>
+                                <p style="color: var(--gold-accent); font-weight: 600;">€${item.price}</p>
+                            </div>
+                            <button onclick="removeFromCart(${index})" style="background: none; border: none; color: var(--medium-gray); cursor: pointer; font-size: 1.2rem;">&times;</button>
+                        </div>
+                    `;
+                }).join('');
+                
+                totalAmount.textContent = `€${total}`;
+                cartTotal.style.display = 'block';
+            }
+        }
+
+        function openCart() {
+            document.getElementById('cart').classList.add('open');
+            document.querySelector('.cart-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            document.getElementById('cart').classList.remove('open');
+            document.querySelector('.cart-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function checkout() {
+            if (cart.length > 0) {
+                alert('Redirigiendo al checkout seguro...\n¡Gracias por elegir ZYRON!');
+                cart = [];
+                updateCartUI();
+                closeCart();
+            }
+        }
+
+        // Newsletter Subscription
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input').value;
+            showNotification('¡Gracias por suscribirte a nuestro newsletter exclusivo!');
+            event.target.reset();
+        }
+
+        // Notification System
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--gold-accent);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: var(--shadow-soft);
+                z-index: 3000;
+                font-weight: 500;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('.featured-products, .about, .collection, .testimonials').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add CSS for slide animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .nav-menu {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: var(--pure-white);
+                    flex-direction: column;
+                    box-shadow: var(--shadow-soft);
+                    padding: 2rem;
+                    display: none;
+                }
+                
+                .nav-menu.active {
+                    display: flex;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add cart button to header (mobile)
+        if (window.innerWidth <= 768) {
+            const headerContainer = document.querySelector('.header-container');
+            const cartButton = document.createElement('button');
+            cartButton.innerHTML = '🛍️';
+            cartButton.style.cssText = `
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                margin-left: 1rem;
+            `;
+            cartButton.onclick = openCart;
+            headerContainer.appendChild(cartButton);
+        }
+    </script>
+</body>
+</html>subtitle">Descubre nuestra selección de prendas más codiciadas</p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" alt="Blazer Premium ZYRON"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Blazer Signature</h3>
+                        <p class="product-description">Confeccionado con lana italiana de primera calidad, corte tailoring contemporáneo.</p>
+                        <div class="product-price">€1,250</div>
+                        <button class="buy-button" onclick="addToCart('blazer-signature')">Comprar Ahora</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" alt="Vestido Elegante ZYRON"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Vestido Midnight</h3>
+                        <p class="product-description">Silueta atemporal en seda natural, diseño minimalista con detalles sutiles.</p>
+                        <div class="product-price">€980</div>
+                        <button class="buy-button" onclick="addToCart('vestido-midnight')">Comprar Ahora</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" alt="Camisa Premium ZYRON"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Camisa Elite</h3>
+                        <p class="product-description">Algodón egipcio de lujo, acabados artesanales y botones de nácar natural.</p>
+                        <div class="product-price">€450</div>
+                        <button class="buy-button" onclick="addToCart('camisa-elite')">Comprar Ahora</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" alt="Abrigo Luxury ZYRON"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Abrigo Heritage</h3>
+                        <p class="product-description">Cachemira premium con forro de seda, diseño clásico reinventado.</p>
+                        <div class="product-price">€2,100</div>
+                        <button class="buy-button" onclick="addToCart('abrigo-heritage')">Comprar Ahora</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" alt="Pantalón Premium ZYRON"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Pantalón Couture</h3>
+                        <p class="product-description">Corte impecable en tejido técnico de alta gama, confort y elegancia.</p>
+                        <div class="product-price">€680</div>
+                        <button class="buy-button" onclick="addToCart('pantalon-couture')">Comprar Ahora</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" alt="Vestido de Noche ZYRON"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Vestido Gala</h3>
+                        <p class="product-description">Crepe de seda con detalles bordados a mano, elegancia suprema.</p>
+                        <div class="product-price">€1,850</div>
+                        <button class="buy-button" onclick="addToCart('vestido-gala')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">Nuestra Filosofía</h2>
+                <p class="about-text">
+                    ZYRON nace de la pasión por crear prendas que trascienden las tendencias. Fundada en 2020 por visionarios de la moda, 
+                    nuestra marca representa la perfecta fusión entre artesanía tradicional y diseño contemporáneo. Cada pieza es 
+                    cuidadosamente elaborada con materiales de la más alta calidad, destinada a aquellos que entienden que la 
+                    verdadera elegancia es atemporal.
+                </p>
+                
+                <div class="values-grid">
+                    <div class="value-item">
+                        <h3 class="value-title">Exclusividad</h3>
+                        <p class="value-description">
+                            Producción limitada para garantizar la singularidad de cada prenda y mantener 
+                            el estatus premium de nuestros clientes.
+                        </p>
+                    </div>
+                    <div class="value-item">
+                        <h3 class="value-title">Artesanía</h3>
+                        <p class="value-description">
+                            Cada detalle es trabajado por maestros artesanos con décadas de experiencia 
+                            en las mejores técnicas de confección.
+                        </p>
+                    </div>
+                    <div class="value-item">
+                        <h3 class="value-title">Sostenibilidad</h3>
+                        <p class="value-description">
+                            Comprometidos con prácticas éticas y materiales sostenibles para un futuro 
+                            responsable en la moda de lujo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Gallery -->
+    <section class="collection" id="coleccion">
+        <div class="container">
+            <h2 class="section-title">Colección Completa</h2>
+            <p class="section-
