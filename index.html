@@ -33,7 +33,7 @@
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
-        button { cursor: pointer; font-family: var(--font-body); }
+        button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
 
         /* NAV */
         nav {
@@ -101,11 +101,13 @@
             font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: inline-block;
         }
         .btn:hover { background: var(--text-main); color: var(--bg-color); }
         .btn-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
         .btn-gold:hover { background: var(--accent-gold); color: var(--bg-color); }
-        .btn-full { width: 100%; text-align: center; margin-top: 10px; }
+        .btn-full { width: 100%; text-align: center; margin-top: 10px; border: 1px solid var(--accent-gold); background: transparent; color: var(--accent-gold); padding: 10px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
+        .btn-full:hover { background: var(--accent-gold); color: black; }
 
         /* COUNTDOWN */
         .countdown-section {
@@ -259,4 +261,154 @@
         </div>
     </section>
 
-    <section class="founder" id
+    <section class="founder" id="historia">
+        <div class="founder-text">
+            <h2>El Origen</h2>
+            <p>Empezar una marca de lujo a los 18 años suena imposible. Y tal vez lo sea. Pero LAYRON es la prueba de que la visión es más fuerte que el presupuesto.</p>
+            <p>Soy un emprendedor colombiano construyendo esto desde cero. Sin grandes inversiones, solo con una obsesión: redefinir la elegancia para nuestra generación.</p>
+            <a href="https://www.youtube.com/@Layron_Official" target="_blank" class="btn">Ver el Documental en YouTube</a>
+        </div>
+        <div class="founder-img"></div>
+    </section>
+
+    <section class="collection" id="coleccion">
+        <div class="section-title">
+            <span>Prototipos</span>
+            <h3>Colección 2026</h3>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1516257984-b1b4d8c9230e?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Camiseta">
+                <div class="card-info">
+                    <h4 class="card-title">Heavyweight Tee</h4>
+                    <span class="card-price">$95.000 COP</span>
+                    <button class="btn-full" onclick="addToCart('Heavyweight Tee', 95000, 'https://images.unsplash.com/photo-1516257984-b1b4d8c9230e?q=80&w=687&auto=format&fit=crop')">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1507680434567-5739c8a97823?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Blazer">
+                <div class="card-info">
+                    <h4 class="card-title">Blazer Lino</h4>
+                    <span class="card-price">$450.000 COP</span>
+                    <button class="btn-full" onclick="addToCart('Blazer Lino', 450000, 'https://images.unsplash.com/photo-1507680434567-5739c8a97823?q=80&w=687&auto=format&fit=crop')">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551488852-081bd4c9a646?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Pantalón">
+                <div class="card-info">
+                    <h4 class="card-title">Pantalón Recto</h4>
+                    <span class="card-price">$220.000 COP</span>
+                    <button class="btn-full" onclick="addToCart('Pantalón Recto', 220000, 'https://images.unsplash.com/photo-1551488852-081bd4c9a646?q=80&w=687&auto=format&fit=crop')">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter" id="unete">
+        <div class="section-title">
+            <span>Acceso Anticipado</span>
+            <h3>Sé parte del lanzamiento</h3>
+        </div>
+        <form>
+            <input type="email" placeholder="Tu correo electrónico">
+            <button type="button" class="btn btn-gold">Suscribirme</button>
+        </form>
+
+        <div class="social-icons">
+            <a href="https://www.instagram.com/layronofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@Layron_Official" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@layronofficial?lang=es" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">LAYRON</div>
+        <p>Contacto: empresa.layron@gmail.com</p>
+        <br>
+        <p>© 2026 LAYRON Brand. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // 1. Cuenta Regresiva
+        const launchDate = new Date("Jan 1, 2026 00:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        }, 1000);
+
+        // 2. Lógica del Carrito
+        let cart = [];
+        
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+            document.getElementById('cartOverlay').classList.toggle('active');
+        }
+
+        function addToCart(name, price, img) {
+            cart.push({name, price, img});
+            updateCartUI();
+            toggleCart(); // Abrir carrito al agregar
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItems');
+            const count = document.getElementById('cartCount');
+            const totalDisplay = document.getElementById('cartTotal');
+            
+            // Actualizar contador
+            count.innerText = cart.length;
+
+            // Calcular total
+            let total = 0;
+            cart.forEach(item => total += item.price);
+            totalDisplay.innerText = "$" + total.toLocaleString('es-CO') + " COP";
+
+            // Renderizar items
+            container.innerHTML = '';
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #555; margin-top: 20px;">Tu bolsa está vacía.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    container.innerHTML += `
+                        <div class="cart-item">
+                            <img src="${item.img}" alt="${item.name}">
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">$${item.price.toLocaleString('es-CO')}</div>
+                                <span class="remove-item" onclick="removeFromCart(${index})">Eliminar</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // 3. Checkout por WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return alert("Tu carrito está vacío");
+
+            // TU NÚMERO DE WHATSAPP REAL
+            const phoneNumber = "573209247296"; 
+
+            let message = "Hola LAYRON, quiero comprar los siguientes artículos:%0A%0A";
+            let total = 0;
+
+            cart.forEach(item => {
+                message += `- ${item.name} ($${item.price.toLocaleString('es-CO')})%0A`;
+                total += item.price;
+            });
+
+            message += `%0A*TOTAL: $${total.toLocaleString('es-CO')} COP*`;
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
