@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAYRON | Modern Luxury Essentials</title>
-    <link rel="icon" href="logo.jpg" type="image/png">
+    <link rel="icon" href="logo.png" type="image/png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -32,6 +33,7 @@
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
+        button { cursor: pointer; font-family: var(--font-body); }
 
         /* NAV */
         nav {
@@ -48,9 +50,30 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .logo { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 4px; font-weight: 600; }
+        
+        .nav-right { display: flex; align-items: center; gap: 30px; }
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: var(--text-muted); }
         .nav-links a:hover { color: var(--accent-gold); }
+
+        /* CART ICON */
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; color: var(--text-main); }
+        .cart-icon:hover { color: var(--accent-gold); }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-gold);
+            color: black;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
 
         /* HERO */
         .hero {
@@ -82,6 +105,7 @@
         .btn:hover { background: var(--text-main); color: var(--bg-color); }
         .btn-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
         .btn-gold:hover { background: var(--accent-gold); color: var(--bg-color); }
+        .btn-full { width: 100%; text-align: center; margin-top: 10px; }
 
         /* COUNTDOWN */
         .countdown-section {
@@ -96,23 +120,14 @@
         .time-box label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
 
         /* FOUNDER STORY */
-        .founder {
-            padding: 100px 10%;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
+        .founder { padding: 100px 10%; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
         .founder-text { flex: 1; min-width: 300px; }
         .founder-text h2 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px; }
         .founder-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
         .founder-img { 
-            flex: 1; 
-            min-width: 300px; 
-            height: 400px; 
-            background: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=687&auto=format&fit=crop'); /* Foto genérica estilo founder */
-            background-size: cover;
-            filter: grayscale(100%);
+            flex: 1; min-width: 300px; height: 400px; 
+            background: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=687&auto=format&fit=crop'); 
+            background-size: cover; filter: grayscale(100%);
         }
 
         /* COLLECTION */
@@ -121,13 +136,13 @@
         .section-title span { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; }
         .section-title h3 { font-family: var(--font-heading); font-size: 2rem; margin-top: 10px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--card-bg); transition: transform 0.3s; }
+        .card { background: var(--card-bg); transition: transform 0.3s; position: relative; }
         .card:hover { transform: translateY(-5px); }
         .card-img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(20%); transition: 0.5s; }
         .card:hover .card-img { filter: grayscale(0%); }
         .card-info { padding: 20px; text-align: center; }
         .card-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .card-price { color: var(--accent-gold); font-size: 0.9rem; font-weight: 300; }
+        .card-price { color: var(--accent-gold); font-size: 0.9rem; font-weight: 300; margin-bottom: 15px; display: block; }
 
         /* NEWSLETTER & SOCIAL */
         .newsletter {
@@ -137,16 +152,7 @@
             background-size: cover;
             background-attachment: fixed;
         }
-        .newsletter input {
-            padding: 15px;
-            width: 300px;
-            background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            margin-right: 10px;
-        }
-        .newsletter input::placeholder { color: #aaa; }
-        
+        .newsletter input { padding: 15px; width: 300px; background: transparent; border: 1px solid var(--text-main); color: var(--text-main); margin-right: 10px; }
         .social-icons { margin-top: 40px; font-size: 1.8rem; display: flex; justify-content: center; gap: 40px; }
         .social-icons a { color: var(--text-main); transition: 0.3s; }
         .social-icons a:hover { color: var(--accent-gold); transform: scale(1.1); }
@@ -155,11 +161,48 @@
         footer { padding: 60px 5%; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-muted); font-size: 0.8rem; }
         .footer-logo { color: var(--text-main); font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 20px; display: inline-block; }
 
+        /* CART SIDEBAR */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: #111;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            transition: 0.4s;
+            z-index: 2000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px; }
+        .cart-header h2 { font-family: var(--font-heading); color: var(--accent-gold); }
+        .close-cart { cursor: pointer; font-size: 1.5rem; }
+        .cart-items { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; }
+        .cart-item-info { flex: 1; }
+        .cart-item-title { font-size: 0.8rem; margin-bottom: 5px; }
+        .cart-item-price { color: var(--accent-gold); font-size: 0.8rem; }
+        .remove-item { color: #ff4444; cursor: pointer; font-size: 0.7rem; text-decoration: underline; margin-top: 5px; display: inline-block; }
+        
+        .cart-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .cart-total { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; font-weight: bold; }
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1500;
+            display: none;
+        }
+        .cart-overlay.active { display: block; }
+
         @media(max-width: 768px) {
             .hero-content h1 { font-size: 2rem; }
             .nav-links { display: none; }
             .founder { flex-direction: column; }
-            .newsletter input { width: 100%; margin-bottom: 10px; }
+            .cart-sidebar { width: 100%; }
         }
     </style>
 </head>
@@ -167,18 +210,44 @@
 
     <nav>
         <div class="logo">LAYRON</div>
-        <div class="nav-links">
-            <a href="#historia">Historia</a>
-            <a href="#coleccion">Colección</a>
-            <a href="#unete">Únete</a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#historia">Historia</a>
+                <a href="#coleccion">Colección</a>
+                <a href="#unete">Únete</a>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <div class="cart-count" id="cartCount">0</div>
+            </div>
         </div>
     </nav>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Mi Bolsa</h2>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align: center; color: #555; margin-top: 20px;">Tu bolsa está vacía.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0 COP</span>
+            </div>
+            <button class="btn btn-gold btn-full" onclick="checkoutWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Finalizar Compra
+            </button>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-content">
             <h1>Esenciales Elevados</h1>
             <p>Diseño Sostenible | Bucaramanga, COL</p>
-            <a href="#unete" class="btn btn-gold">Unirse a la Lista de Espera</a>
+            <a href="#coleccion" class="btn btn-gold">Ver Colección 2026</a>
         </div>
     </section>
 
@@ -190,82 +259,4 @@
         </div>
     </section>
 
-    <section class="founder" id="historia">
-        <div class="founder-text">
-            <h2>El Origen</h2>
-            <p>Empezar una marca de lujo a los 18 años suena imposible. Y tal vez lo sea. Pero LAYRON es la prueba de que la visión es más fuerte que el presupuesto.</p>
-            <p>Soy un emprendedor colombiano construyendo esto desde cero. Sin grandes inversiones, solo con una obsesión: redefinir la elegancia para nuestra generación.</p>
-            <a href="https://www.youtube.com/@Layron_Official" target="_blank" class="btn">Ver el Documental en YouTube</a>
-        </div>
-        <div class="founder-img"></div>
-    </section>
-
-    <section class="collection" id="coleccion">
-        <div class="section-title">
-            <span>Prototipos</span>
-            <h3>Colección 2026</h3>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1516257984-b1b4d8c9230e?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Camiseta">
-                <div class="card-info">
-                    <h4 class="card-title">Heavyweight Tee</h4>
-                    <p class="card-price">$95.000 COP</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1507680434567-5739c8a97823?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Blazer">
-                <div class="card-info">
-                    <h4 class="card-title">Blazer Lino</h4>
-                    <p class="card-price">$450.000 COP</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1551488852-081bd4c9a646?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Pantalón">
-                <div class="card-info">
-                    <h4 class="card-title">Pantalón Recto</h4>
-                    <p class="card-price">$220.000 COP</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="newsletter" id="unete">
-        <div class="section-title">
-            <span>Acceso Anticipado</span>
-            <h3>Sé parte del lanzamiento</h3>
-        </div>
-        <form>
-            <input type="email" placeholder="Tu correo electrónico">
-            <button type="button" class="btn btn-gold">Suscribirme</button>
-        </form>
-
-        <div class="social-icons">
-            <a href="https://www.instagram.com/layronofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@Layron_Official" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@layronofficial?lang=es" target="_blank"><i class="fab fa-tiktok"></i></a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-logo">LAYRON</div>
-        <p>Contacto: empresa.layron@gmail.com</p>
-        <br>
-        <p>© 2026 LAYRON Official. Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-        // Cuenta regresiva simple
-        const launchDate = new Date("Jan 1, 2026 00:00:00").getTime();
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        }, 1000);
-    </script>
-</body>
-</html>
-
-
-
+    <section class="founder" id
