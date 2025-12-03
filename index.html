@@ -146,7 +146,8 @@
         }
         .newsletter input::placeholder { color: #aaa; }
         
-        .social-icons { margin-top: 40px; font-size: 1.5rem; display: flex; justify-content: center; gap: 30px; }
+        .social-icons { margin-top: 40px; font-size: 1.8rem; display: flex; justify-content: center; gap: 40px; }
+        .social-icons a { color: var(--text-main); transition: 0.3s; }
         .social-icons a:hover { color: var(--accent-gold); transform: scale(1.1); }
 
         /* FOOTER */
@@ -176,91 +177,4 @@
         <div class="hero-content">
             <h1>Esenciales Elevados</h1>
             <p>Diseño Sostenible | Bucaramanga, COL</p>
-            <a href="#unete" class="btn btn-gold">Unirse a la Lista de Espera</a>
-        </div>
-    </section>
-
-    <section class="countdown-section">
-        <p class="countdown-title">Lanzamiento Oficial 2026</p>
-        <div class="timer" id="timer">
-            <div class="time-box"><span id="days">00</span><label>Días</label></div>
-            <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
-        </div>
-    </section>
-
-    <section class="founder" id="historia">
-        <div class="founder-text">
-            <h2>El Origen</h2>
-            <p>Empezar una marca de lujo a los 18 años suena imposible. Y tal vez lo sea. Pero LAYRON es la prueba de que la visión es más fuerte que el presupuesto.</p>
-            <p>Soy un emprendedor colombiano construyendo esto desde cero. Sin grandes inversiones, solo con una obsesión: redefinir la elegancia para nuestra generación.</p>
-            <a href="TU_LINK_DE_YOUTUBE" target="_blank" class="btn">Ver el Documental en YouTube</a>
-        </div>
-        <div class="founder-img"></div>
-    </section>
-
-    <section class="collection" id="coleccion">
-        <div class="section-title">
-            <span>Prototipos</span>
-            <h3>Colección 2026</h3>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1516257984-b1b4d8c9230e?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Camiseta">
-                <div class="card-info">
-                    <h4 class="card-title">Heavyweight Tee</h4>
-                    <p class="card-price">$95.000 COP</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1507680434567-5739c8a97823?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Blazer">
-                <div class="card-info">
-                    <h4 class="card-title">Blazer Lino</h4>
-                    <p class="card-price">$450.000 COP</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1551488852-081bd4c9a646?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Pantalón">
-                <div class="card-info">
-                    <h4 class="card-title">Pantalón Recto</h4>
-                    <p class="card-price">$220.000 COP</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="newsletter" id="unete">
-        <div class="section-title">
-            <span>Acceso Anticipado</span>
-            <h3>Sé parte del lanzamiento</h3>
-        </div>
-        <form>
-            <input type="email" placeholder="Tu correo electrónico">
-            <button type="button" class="btn btn-gold">Suscribirme</button>
-        </form>
-
-        <div class="social-icons">
-            <a href="TU_LINK_DE_INSTAGRAM" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="TU_LINK_DE_YOUTUBE" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="TU_LINK_DE_TIKTOK" target="_blank"><i class="fab fa-tiktok"></i></a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-logo">LAYRON</div>
-        <p>Contacto: empresa.layron@gmail.com</p>
-        <br>
-        <p>© 2026 LAYRON Brand. Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-        // Cuenta regresiva simple
-        const launchDate = new Date("Jan 1, 2026 00:00:00").getTime();
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        }, 1000);
-    </script>
-</body>
-</html>
+            <a href="#unete" class="btn btn-gold">Unirse a la Lista
