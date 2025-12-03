@@ -3,105 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAYRON | Dark Modern Luxury</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <title>LAYRON | Modern Luxury Essentials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- RESET Y VARIABLES GLOBALES --- */
+        /* --- CONFIGURACIÓN DE LUJO --- */
         :root {
-            --color-bg-main: #0a0a0a; /* Negro profundo casi puro */
-            --color-bg-secondary: #141414; /* Negro ligeramente más claro para tarjetas */
-            --color-text-primary: #f0f0f0; /* Blanco hueso */
-            --color-text-secondary: #a0a0a0; /* Gris elegante */
-            --color-accent: #ffffff; /* Blanco puro para acentos */
-            --font-title: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
+            --bg-color: #050505; /* Negro puro */
+            --card-bg: #111111; /* Gris muy oscuro */
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-gold: #D4AF37; /* Dorado sutil premium */
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Lato', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: var(--color-bg-main);
-            color: var(--color-text-primary);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: var(--font-body);
-            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
-        img { width: 100%; display: block; }
 
-        /* --- TIPOGRAFÍA DE LUJO --- */
-        h1, h2, h3 {
-            font-family: var(--font-title);
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
-
-        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1rem; }
-        h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; }
-        .subtitle { color: var(--color-text-secondary); font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; }
-
-        /* --- BOTONES PREMIUM --- */
-        .btn-luxury {
-            display: inline-block;
-            padding: 15px 40px;
-            border: 1px solid var(--color-accent);
-            color: var(--color-accent);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            transition: all 0.4s ease;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .btn-luxury:hover {
-            background: var(--color-accent);
-            color: var(--color-bg-main);
-        }
-
-        /* --- HEADER / NAVEGACIÓN --- */
-        header {
+        /* --- NAVEGACIÓN STICKY --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-            background: rgba(10, 10, 10, 0.8); /* Fondo semi-transparente */
-            backdrop-filter: blur(10px); /* Efecto de desenfoque moderno */
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .logo {
-            font-family: var(--font-title);
+            font-family: var(--font-heading);
             font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
+            font-weight: 600;
         }
 
-        nav ul { display: flex; gap: 30px; }
-        nav ul li a { 
-            font-size: 0.8rem; 
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
             text-transform: uppercase; 
-            letter-spacing: 1px; 
-            opacity: 0.7;
+            font-size: 0.75rem; 
+            letter-spacing: 2px; 
+            color: var(--text-muted);
         }
-        nav ul li a:hover { opacity: 1; }
+        .nav-links a:hover { color: var(--accent-gold); }
 
-        /* --- SECCIÓN HERO (PORTADA) --- */
+        /* --- HERO SECTION (PORTADA) --- */
         .hero {
             height: 100vh;
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); /* Foto oscura de hombre urbano */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed; /* Efecto Parallax */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -109,149 +77,196 @@
             padding: 0 20px;
         }
 
-        .hero-content {max-width: 800px; animation: fadeIn 1.5s ease-out;}
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
 
-        /* --- SECCIÓN MANIFIESTO (FILOSOFÍA) --- */
+        .hero-content p {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: 1px solid var(--text-main);
+            background: transparent;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* --- MANIFIESTO --- */
         .manifesto {
             padding: 100px 10%;
             text-align: center;
-            background-color: var(--color-bg-main);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .manifesto h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
         }
         .manifesto p {
-            font-size: 1.5rem;
-            color: var(--color-text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-            font-family: var(--font-title);
+            font-size: 1.2rem;
             line-height: 1.8;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .highlight { color: var(--color-text-primary); border-bottom: 1px solid var(--color-text-secondary); }
 
-        /* --- SECCIÓN COLECCIÓN (GRID OSCURO) --- */
-        .collection { padding: 100px 5%; background-color: var(--color-bg-secondary); }
-        .product-grid {
+        /* --- COLECCIÓN (GRID) --- */
+        .collection { padding: 80px 5%; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title span {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+        }
+        .section-title h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
+            gap: 30px;
         }
-        .product-card {
-            background-color: var(--color-bg-main);
-            transition: transform 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.05);
+
+        .card {
+            background: var(--card-bg);
+            transition: transform 0.3s;
         }
-        .product-card:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.2); }
-        .product-image {
+        .card:hover { transform: translateY(-5px); }
+        
+        .card-img {
+            width: 100%;
             height: 400px;
-            overflow: hidden;
-        }
-        .product-image img {
-            height: 100%;
             object-fit: cover;
-            transition: transform 0.8s ease;
-            filter: grayscale(30%); /* Desaturar un poco las fotos para el look dark */
+            filter: grayscale(20%);
+            transition: 0.5s;
         }
-        .product-card:hover .product-image img { transform: scale(1.05); filter: grayscale(0%); }
-        .product-info { padding: 25px; text-align: center; }
-        .product-title { font-family: var(--font-title); font-size: 1.2rem; margin-bottom: 10px; }
-        .product-price { color: var(--color-text-secondary); font-weight: 300; }
+        .card:hover .card-img { filter: grayscale(0%); }
 
-        /* --- FOOTER MINIMALISTA --- */
+        .card-info { padding: 20px; text-align: center; }
+        .card-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .card-price {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* --- FOOTER --- */
         footer {
-            padding: 80px 5%;
-            background: var(--color-bg-main);
-            text-align: center;
+            padding: 60px 5%;
             border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
-        .footer-logo { font-family: var(--font-title); font-size: 2rem; margin-bottom: 20px; letter-spacing: 5px; }
-        .copyright { margin-top: 40px; font-size: 0.8rem; color: var(--color-text-secondary); }
+        .footer-logo {
+            color: var(--text-main);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            nav { display: none; } /* Ocultar menú en móvil por ahora para simplificar */
-            .hero { height: 80vh; }
+        /* --- MOBILE --- */
+        @media(max-width: 768px) {
+            .hero-content h1 { font-size: 2rem; }
+            .nav-links { display: none; } /* Menú simplificado para móvil */
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <nav>
         <div class="logo">LAYRON</div>
-        <nav>
-            <ul>
-                <li><a href="#coleccion">Colección</a></li>
-                <li><a href="#manifiesto">Filosofía</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+        <div class="nav-links">
+            <a href="#">Inicio</a>
+            <a href="#coleccion">Colección</a>
+            <a href="#filosofia">Filosofía</a>
+        </div>
+    </nav>
 
     <section class="hero">
         <div class="hero-content">
-            <p class="subtitle">Est. 2026 — Colombia</p>
-            <h1>LA NUEVA ELEGANCIA OSCURA</h1>
-            <p style="margin-bottom: 30px; color: var(--color-text-secondary);">Esenciales urbanos. Arquitectura para el cuerpo. Lujo sostenible.</p>
-            <a href="#coleccion" class="btn-luxury">Explorar la Sombra</a>
+            <h1>Esenciales Elevados</h1>
+            <p>Diseño Sostenible | Bucaramanga, COL</p>
+            <a href="#coleccion" class="btn">Ver Colección 2026</a>
         </div>
     </section>
 
-    <section class="manifiesto" id="manifiesto">
-        <p>
-            No seguimos tendencias. Definimos el uniforme del nuevo profesional urbano. LAYRON es la intersección entre la <span class="highlight">precisión del sastre</span> y la <span class="highlight">rebeldía de la calle</span>. Calidad que se siente en la oscuridad.
-        </p>
+    <section class="manifesto" id="filosofia">
+        <h2>La Nueva Era</h2>
+        <p>LAYRON no es solo ropa. Es la respuesta a una generación que exige calidad sin sacrificar el planeta. Cortes arquitectónicos, colores nocturnos y una ética inquebrantable.</p>
     </section>
 
     <section class="collection" id="coleccion">
-        <p class="subtitle" style="text-align: center;">Edición Limitada 001</p>
-        <h2>ESENCIALES NOCTURNOS</h2>
-        
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Blazer Layron">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">The Architect Blazer</h3>
-                    <p class="product-price">$450.000 COP</p>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Vestido Layron">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Vestido Silueta Noche</h3>
-                    <p class="product-price">$320.000 COP</p>
-                </div>
-            </div>
-
-             <div class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd15?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Camiseta Premium">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Camiseta Essential Heavyweight</h3>
-                    <p class="product-price">$95.000 COP</p>
-                </div>
-            </div>
+        <div class="section-title">
+            <span>Edición Limitada</span>
+            <h3>Los Favoritos</h3>
         </div>
-        
-        <div style="text-align: center; margin-top: 60px;">
-            <button class="btn-luxury">Ver Todo el Catálogo</button>
+
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1516257984-b1b4d8c9230e?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Camiseta">
+                <div class="card-info">
+                    <h4 class="card-title">Camiseta Essential Heavyweight</h4>
+                    <p class="card-price">$95.000 COP</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1507680434567-5739c8a97823?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Blazer">
+                <div class="card-info">
+                    <h4 class="card-title">Blazer Estructurado Lino</h4>
+                    <p class="card-price">$450.000 COP</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551488852-081bd4c9a646?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Pantalón">
+                <div class="card-info">
+                    <h4 class="card-title">Pantalón Corte Recto</h4>
+                    <p class="card-price">$220.000 COP</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer id="contacto">
+    <footer>
         <div class="footer-logo">LAYRON</div>
-        <p style="color: var(--color-text-secondary); margin-bottom: 20px;">Bucaramanga, Colombia.</p>
-        <p style="color: var(--color-text-secondary);">contacto@layron.com</p>
-        
-        <div class="copyright">
-            © 2026 LAYRON Brand. Todos los derechos reservados.
-        </div>
+        <p>Contacto: empresa.layron@gmail.com</p>
+        <br>
+        <p>© 2026 LAYRON Brand. Todos los derechos reservados.</p>
     </footer>
 
 </body>
