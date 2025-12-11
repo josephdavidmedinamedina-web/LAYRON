@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAYRON | Modern Luxury Essentials</title>
     
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3531/3531847.png" type="image/png">
+    <link rel="icon" href="logo.jpg" type="image/jpeg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,13 +42,36 @@
 
         /* --- NAV PRO --- */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 25px 6%;
+            position: fixed; top: 0; width: 100%; padding: 20px 6%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5, 5, 5, 0.6); backdrop-filter: blur(15px);
+            background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px); z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
         }
-        .logo { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 6px; font-weight: 600; color: var(--text-main); text-transform: uppercase; }
+
+        /* LOGO CONTAINER (NUEVO) */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Espacio entre imagen y texto */
+            cursor: pointer;
+        }
+
+        .logo-img {
+            height: 45px; /* Tamaño del logo */
+            width: auto;
+            border-radius: 2px; /* Borde muy sutil */
+        }
+
+        .logo-text { 
+            font-family: var(--font-heading); 
+            font-size: 1.8rem; 
+            letter-spacing: 6px; 
+            font-weight: 600; 
+            color: var(--text-main); 
+            text-transform: uppercase; 
+        }
+
         .nav-right { display: flex; align-items: center; gap: 40px; }
         .nav-links { display: flex; gap: 35px; }
         .nav-links a { position: relative; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2.5px; color: #ffffff; padding-bottom: 5px; }
@@ -103,31 +126,13 @@
         }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- MARQUEE (ACTUALIZADO A BLANCO/GRIS PROFESIONAL) --- */
+        /* --- MARQUEE (GRIS/BLANCO) --- */
         .marquee { 
-            background: #080808;
-            /* CAMBIO AQUÍ: Color de texto principal a blanco */
-            color: var(--text-main); 
-            padding: 15px 0; 
-            overflow: hidden; 
-            white-space: nowrap; 
-            position: relative; 
-            z-index: 5; 
-            /* Los bordes dorados se mantienen */
-            border-top: 1px solid rgba(212, 175, 55, 0.1); 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            background: #080808; color: var(--text-main); padding: 15px 0; overflow: hidden; white-space: nowrap; 
+            position: relative; z-index: 5; border-top: 1px solid rgba(212, 175, 55, 0.1); border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
         .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
-        .marquee-item { 
-            font-family: var(--font-body); 
-            font-weight: 400; 
-            text-transform: uppercase; 
-            margin: 0 50px; 
-            letter-spacing: 3px; 
-            font-size: 0.8rem; 
-            /* La opacidad hace que el blanco se vea como un gris profesional */
-            opacity: 0.8; 
-        }
+        .marquee-item { font-family: var(--font-body); font-weight: 400; text-transform: uppercase; margin: 0 50px; letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* --- SECCIONES (SCROLL REVEAL) --- */
@@ -300,7 +305,11 @@
 <body>
 
     <nav>
-        <div class="logo">LAYRON</div>
+        <div class="logo-container">
+            <img src="logo.jpg" class="logo-img" alt="Logo LAYRON">
+            <span class="logo-text">LAYRON</span>
+        </div>
+
         <div class="nav-right">
             <div class="nav-links">
                 <a href="#historia">Historia</a>
