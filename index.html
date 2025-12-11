@@ -12,9 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.54/build/spline-viewer.js"></script>
     
     <style>
-        /* --- VARIABLES DE DISEÑO --- */
+        /* --- VARIABLES --- */
         :root {
             --bg-color: #050505;
             --card-bg: #111111;
@@ -32,20 +34,19 @@
             color: var(--text-main);
             font-family: var(--font-body);
             overflow-x: hidden;
-            /* Cursor normal restaurado */
+            scroll-behavior: smooth;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
         button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
 
-        /* --- NAV PRO --- */
+        /* --- NAV PRO (Glassmorphism) --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 25px 6%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.08); transition: all 0.4s ease;
+            background: rgba(5, 5, 5, 0.6); backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
         }
         .logo { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 6px; font-weight: 600; color: var(--text-main); text-transform: uppercase; }
         .nav-right { display: flex; align-items: center; gap: 40px; }
@@ -53,171 +54,187 @@
         .nav-links a { position: relative; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2.5px; color: #cccccc; padding-bottom: 5px; }
         .nav-links a::after {
             content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 50%;
-            background-color: var(--accent-gold); transition: all 0.3s ease; transform: translateX(-50%);
+            background-color: var(--accent-gold); transition: 0.3s ease; transform: translateX(-50%);
         }
         .nav-links a:hover { color: white; }
         .nav-links a:hover::after { width: 100%; }
+        
+        /* Icono Carrito */
         .cart-icon { position: relative; cursor: pointer; font-size: 1.1rem; color: var(--text-main); transition: transform 0.3s; }
         .cart-icon:hover { transform: scale(1.1); color: var(--accent-gold); }
         .cart-count {
             position: absolute; top: -6px; right: -8px; background: var(--accent-gold); color: black;
             font-size: 0.6rem; width: 16px; height: 16px; border-radius: 50%; display: flex;
-            justify-content: center; align-items: center; font-weight: 700; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+            justify-content: center; align-items: center; font-weight: 700; box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
         }
 
-        /* --- HERO --- */
+        /* --- HERO SECTION 3D (ESTILO FRAXBIT) --- */
         .hero {
-            height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centramos el contenido */
+            overflow: hidden;
+            /* Fondo sutil por si el 3D tarda en cargar */
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 70%);
         }
-        .hero-content h1 { font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
-        .hero-content p { font-size: 1rem; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 40px; text-transform: uppercase; }
-        
-        .btn { padding: 15px 40px; border: 1px solid var(--text-main); background: transparent; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; display: inline-block; }
-        .btn:hover { background: var(--text-main); color: var(--bg-color); }
-        .btn-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
-        .btn-gold:hover { background: var(--accent-gold); color: var(--bg-color); }
 
-        /* --- MARQUEE INTEGRADO (NUEVO DISEÑO) --- */
+        /* El contenedor del texto flota SOBRE el modelo 3D */
+        .hero-content {
+            position: absolute;
+            z-index: 2; /* Encima del 3D */
+            text-align: center;
+            pointer-events: none; /* Permite hacer clic en el 3D a través del texto */
+        }
+        
+        .hero-content h1 { 
+            font-family: var(--font-heading); font-size: 4rem; letter-spacing: 8px; 
+            margin-bottom: 20px; text-transform: uppercase; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            opacity: 0; animation: fadeUp 1s ease forwards 0.5s; /* Animación de entrada */
+        }
+        
+        .hero-content p { 
+            font-size: 1.1rem; letter-spacing: 4px; color: rgba(255,255,255,0.8); 
+            margin-bottom: 40px; text-transform: uppercase;
+            opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
+        }
+
+        /* Botón clickeable (reactivamos pointer-events) */
+        .hero-btn-container { pointer-events: auto; }
+
+        /* EL VISOR 3D DE FONDO */
+        spline-viewer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1; /* Detrás del texto */
+            /* Filtros para integrarlo con el modo oscuro */
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        /* Animación Fade Up genérica */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- MARQUEE ELEGANTE --- */
         .marquee { 
-            background: #080808; /* Fondo oscuro casi negro */
-            color: var(--accent-gold); /* Texto dorado */
-            padding: 12px 0; 
-            overflow: hidden; 
-            white-space: nowrap; 
-            position: relative; 
-            z-index: 2;
-            /* Bordes sutiles arriba y abajo para darle estructura */
-            border-top: 1px solid rgba(212, 175, 55, 0.15);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            background: #080808; color: var(--accent-gold); padding: 15px 0; overflow: hidden; white-space: nowrap; 
+            position: relative; z-index: 5; border-top: 1px solid rgba(212, 175, 55, 0.1); border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
-        .marquee-content { display: inline-block; animation: scroll 30s linear infinite; /* Un poco más lento para elegancia */ }
-        .marquee-item { 
-            font-family: var(--font-body); /* Fuente más limpia para lectura técnica */
-            font-weight: 400; 
-            text-transform: uppercase; 
-            margin: 0 40px; 
-            letter-spacing: 3px; 
-            font-size: 0.8rem;
-            opacity: 0.8; /* Un poco transparente para no distraer */
-        }
+        .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
+        .marquee-item { font-family: var(--font-body); font-weight: 400; text-transform: uppercase; margin: 0 50px; letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- CUENTA REGRESIVA --- */
-        .countdown-section {
-            padding: 100px 20px; text-align: center; background: radial-gradient(circle at center, #1a1a1a 0%, #000000 80%);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1); position: relative;
+        /* --- SECCIONES CON SCROLL REVEAL --- */
+        /* Esta clase oculta los elementos inicialmente */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
         }
-        .countdown-section::before { content: ''; position: absolute; top: 70px; left: 50%; transform: translateX(-50%); width: 60px; height: 2px; background: var(--accent-gold); opacity: 0.5; }
-        .countdown-title { color: var(--accent-gold); letter-spacing: 6px; font-size: 0.9rem; margin-bottom: 50px; text-transform: uppercase; font-family: var(--font-body); font-weight: 700; }
-        .timer { display: flex; justify-content: center; align-items: flex-start; gap: 20px; }
-        .time-box { display: flex; flex-direction: column; align-items: center; padding: 0 15px; }
+        /* Esta clase se añade con JS cuando bajas con el scroll */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .countdown-section { padding: 100px 20px; text-align: center; background: radial-gradient(circle at center, #151515 0%, #050505 80%); border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
+        .countdown-title { color: var(--accent-gold); letter-spacing: 6px; font-size: 0.9rem; margin-bottom: 50px; text-transform: uppercase; font-weight: 700; }
+        .timer { display: flex; justify-content: center; gap: 20px; }
         .time-box span { 
-            display: block; font-family: var(--font-heading); font-size: 4rem; line-height: 1; font-weight: 600;
-            background: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728, #aa771c);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.5)); margin-bottom: 15px;
+            display: block; font-family: var(--font-heading); font-size: 4rem; font-weight: 600;
+            background: linear-gradient(to bottom, #bf953f, #fcf6ba, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px; filter: drop-shadow(0 5px 15px rgba(212, 175, 55, 0.2));
         }
         .time-box label { font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 3px; }
         .separator { font-family: var(--font-heading); font-size: 3rem; color: rgba(212, 175, 55, 0.3); margin-top: 5px; }
 
-        /* --- HISTORIA --- */
-        .founder { padding: 100px 10%; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
-        .founder-text { flex: 1; min-width: 300px; }
-        .founder-text h2 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px; }
-        .founder-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
-        .founder-img { flex: 1; min-width: 300px; height: 400px; background: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=687&auto=format&fit=crop'); background-size: cover; filter: grayscale(100%); }
-
         /* --- ROADMAP --- */
-        .roadmap { padding: 80px 10%; background: #080808; text-align: center; }
-        .roadmap-container { position: relative; max-width: 800px; margin: 50px auto 0; padding-left: 30px; border-left: 2px solid rgba(212, 175, 55, 0.3); text-align: left; }
-        .roadmap-item { position: relative; margin-bottom: 50px; padding-left: 30px; }
-        .roadmap-item::before { content: ''; position: absolute; left: -36px; top: 5px; width: 14px; height: 14px; background: var(--bg-color); border: 2px solid var(--accent-gold); border-radius: 50%; z-index: 2; }
-        .roadmap-date { color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 5px; display: block; }
-        .roadmap-title { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 10px; color: white; }
-        .roadmap-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-        .roadmap-item.active::before { background: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold); }
+        .roadmap { padding: 100px 10%; background: #080808; }
+        .section-title { text-align: center; margin-bottom: 80px; }
+        .section-title span { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; display: block; margin-bottom: 15px; }
+        .section-title h3 { font-family: var(--font-heading); font-size: 2.5rem; }
+        
+        .roadmap-container { max-width: 800px; margin: 0 auto; border-left: 2px solid rgba(212, 175, 55, 0.2); padding-left: 40px; }
+        .roadmap-item { position: relative; margin-bottom: 60px; }
+        .roadmap-item::before { 
+            content: ''; position: absolute; left: -47px; top: 5px; width: 16px; height: 16px; 
+            background: var(--bg-color); border: 2px solid var(--accent-gold); border-radius: 50%; 
+            transition: 0.3s;
+        }
+        .roadmap-item:hover::before { background: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold); }
+        .roadmap-date { color: var(--accent-gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .roadmap-title { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 10px; color: white; }
+        .roadmap-desc { color: #888; font-size: 1rem; line-height: 1.6; }
 
         /* --- COLECCIÓN --- */
-        .collection { padding: 80px 5%; }
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title span { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; }
-        .section-title h3 { font-family: var(--font-heading); font-size: 2rem; margin-top: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--card-bg); transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
-        .card-img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(30%) brightness(0.9); transition: all 0.6s ease; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); border-color: rgba(212, 175, 55, 0.3); }
-        .card:hover .card-img { transform: scale(1.05); filter: grayscale(0%) brightness(1.1); }
-        .card-info { padding: 25px 20px; text-align: center; position: relative; z-index: 2; background: var(--card-bg); }
-        .card-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .card-price { color: var(--accent-gold); font-size: 0.9rem; font-weight: 300; margin-bottom: 15px; display: block; }
-        .btn-full { width: 100%; text-align: center; margin-top: 10px; border: 1px solid var(--accent-gold); background: transparent; color: var(--accent-gold); padding: 10px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s; }
-        .btn-full:hover { background: var(--accent-gold); color: black; }
+        .collection { padding: 100px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .card { 
+            background: var(--card-bg); position: relative; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .card:hover { transform: translateY(-15px); border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .card-img { width: 100%; height: 450px; object-fit: cover; filter: grayscale(40%) brightness(0.9); transition: 0.7s ease; }
+        .card:hover .card-img { filter: grayscale(0%) brightness(1.1); transform: scale(1.05); }
+        .card-info { padding: 30px; text-align: center; background: linear-gradient(to top, #111 80%, transparent); position: absolute; bottom: 0; width: 100%; }
+        .card-title { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .card-price { color: var(--accent-gold); font-size: 1rem; }
 
-        /* --- VENTANA MODAL --- */
+        /* --- MODAL --- */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); z-index: 3000; justify-content: center; align-items: center;
-            backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.95); z-index: 3000; justify-content: center; align-items: center;
+            backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.4s ease;
         }
         .modal.active { display: flex; opacity: 1; }
         .modal-content {
-            background: #111; width: 90%; max-width: 900px; display: flex;
-            border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 0 40px rgba(0,0,0,0.8);
-            position: relative; animation: slideUp 0.4s ease forwards;
+            background: #111; width: 90%; max-width: 1000px; display: flex;
+            border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+            animation: modalUp 0.5s ease forwards;
         }
-        .modal-left { flex: 1; overflow: hidden; }
+        @keyframes modalUp { from { transform: translateY(50px) scale(0.95); } to { transform: translateY(0) scale(1); } }
+        
+        .modal-left { flex: 1; height: 500px; }
         .modal-left img { width: 100%; height: 100%; object-fit: cover; }
-        .modal-right { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; color: #555; cursor: pointer; transition: 0.3s; }
-        .close-modal:hover { color: var(--accent-gold); }
-        .modal-title { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 10px; color: white; }
-        .modal-price { font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 25px; display: block; }
-        .modal-desc { color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; font-size: 0.9rem; }
-        .modal-specs { margin-bottom: 30px; }
-        .modal-specs li { color: #888; font-size: 0.8rem; margin-bottom: 8px; list-style: square; margin-left: 20px; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-right { flex: 1; padding: 50px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        .close-modal { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #555; cursor: pointer; }
+        .close-modal:hover { color: white; }
+        
+        .btn-full { 
+            width: 100%; text-align: center; margin-top: 20px; border: 1px solid var(--accent-gold); 
+            background: transparent; color: var(--accent-gold); padding: 15px; text-transform: uppercase; 
+            letter-spacing: 2px; font-size: 0.9rem; transition: 0.3s;
+        }
+        .btn-full:hover { background: var(--accent-gold); color: black; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
 
-        /* --- NEWSLETTER --- */
-        .newsletter { padding: 100px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-attachment: fixed; }
-        .newsletter input { padding: 15px; width: 300px; background: transparent; border: 1px solid var(--text-main); color: var(--text-main); margin-right: 10px; }
-        .social-icons { margin-top: 40px; font-size: 1.8rem; display: flex; justify-content: center; gap: 40px; }
-        .social-icons a { color: var(--text-main); transition: 0.3s; }
-        .social-icons a:hover { color: var(--accent-gold); transform: scale(1.1); }
-        footer { padding: 60px 5%; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-muted); font-size: 0.8rem; }
+        /* --- NEWSLETTER & FOOTER --- */
+        .newsletter { padding: 120px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-attachment: fixed; }
+        .newsletter input { padding: 15px; width: 350px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; margin-right: 10px; }
+        footer { padding: 50px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: #666; font-size: 0.8rem; }
 
-        /* --- CARRITO SIDEBAR --- */
-        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 350px; height: 100vh; background: #111; box-shadow: -5px 0 15px rgba(0,0,0,0.5); transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; }
+        /* --- CARRITO (Estilos anteriores) --- */
+        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 350px; height: 100vh; background: #0f0f0f; box-shadow: -10px 0 30px rgba(0,0,0,0.8); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 2000; padding: 30px; display: flex; flex-direction: column; border-left: 1px solid rgba(255,255,255,0.05); }
         .cart-sidebar.active { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px; }
-        .cart-header h2 { font-family: var(--font-heading); color: var(--accent-gold); }
-        .close-cart { cursor: pointer; font-size: 1.5rem; }
-        .cart-items { flex: 1; overflow-y: auto; }
-        .cart-item { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; }
-        .cart-item-info { flex: 1; }
-        .cart-item-title { font-size: 0.8rem; margin-bottom: 5px; }
-        .cart-item-price { color: var(--accent-gold); font-size: 0.8rem; }
-        .remove-item { color: #ff4444; cursor: pointer; font-size: 0.7rem; text-decoration: underline; margin-top: 5px; display: inline-block; }
-        .cart-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-        .cart-total { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; font-weight: bold; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1500; display: none; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1500; display: none; backdrop-filter: blur(5px); }
         .cart-overlay.active { display: block; }
+        .cart-header { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 20px; }
+        .cart-items { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; gap: 15px; margin-bottom: 20px; }
+        .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 4px; }
 
         /* Responsive */
         @media(max-width: 768px) {
-            .hero-content h1 { font-size: 2rem; }
+            .hero-content h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
-            .founder { flex-direction: column; }
-            .cart-sidebar { width: 100%; }
-            .modal-content { flex-direction: column; overflow-y: auto; max-height: 90vh; }
-            .modal-left { height: 300px; }
-            .modal-right { padding: 20px; }
-            .time-box span { font-size: 2rem; }
-            .timer { gap: 5px; }
-            .time-box { padding: 0 5px; }
-            .separator { font-size: 1.5rem; margin-top: 5px; }
+            .modal-content { flex-direction: column; height: 100vh; overflow-y: scroll; }
+            .modal-left { height: 300px; flex: none; }
+            .time-box span { font-size: 2.5rem; }
+            .newsletter input { width: 100%; margin-bottom: 15px; }
         }
     </style>
 </head>
@@ -228,7 +245,7 @@
         <div class="nav-right">
             <div class="nav-links">
                 <a href="#historia">Historia</a>
-                <a href="#roadmap">Roadmap</a>
+                <a href="#roadmap">Vision</a>
                 <a href="#coleccion">Colección</a>
             </div>
             <div class="cart-icon" onclick="toggleCart()">
@@ -240,16 +257,13 @@
 
     <div class="modal" id="productModal">
         <div class="modal-content">
-            <div class="modal-left">
-                <img id="modalImg" src="" alt="Producto">
-            </div>
+            <div class="modal-left"><img id="modalImg" src="" alt="Producto"></div>
             <div class="modal-right">
                 <span class="close-modal" onclick="closeModal()">&times;</span>
-                <h2 id="modalTitle" class="modal-title">Nombre Producto</h2>
-                <span id="modalPrice" class="modal-price">$0 COP</span>
-                <p id="modalDesc" class="modal-desc">Descripción detallada del producto...</p>
-                <ul id="modalSpecs" class="modal-specs">
-                    </ul>
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <span id="modalPrice" class="modal-price"></span>
+                <p id="modalDesc" class="modal-desc"></p>
+                <ul id="modalSpecs" class="modal-specs"></ul>
                 <button class="btn-full" id="modalAddBtn">Agregar al Carrito</button>
             </div>
         </div>
@@ -258,48 +272,40 @@
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
-            <h2>Mi Bolsa</h2>
+            <h2 style="font-family: var(--font-heading); color: var(--accent-gold);">Tu Bolsa</h2>
             <span class="close-cart" onclick="toggleCart()">&times;</span>
         </div>
-        <div class="cart-items" id="cartItems">
-            <p style="text-align: center; color: #555; margin-top: 20px;">Tu bolsa está vacía.</p>
-        </div>
+        <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cartTotal">$0 COP</span>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold;">
+                <span>Total:</span><span id="cartTotal">$0 COP</span>
             </div>
-            <button class="btn btn-gold btn-full" onclick="checkoutWhatsApp()">
-                <i class="fab fa-whatsapp"></i> Finalizar Compra
-            </button>
+            <button class="btn-full" onclick="checkoutWhatsApp()">Finalizar en WhatsApp</button>
         </div>
     </div>
 
     <section class="hero">
+        <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
+        
         <div class="hero-content">
-            <h1>Esenciales Elevados</h1>
-            <p>Diseño Sostenible | Bucaramanga, COL</p>
-            <a href="#coleccion" class="btn btn-gold">Ver Colección 2026</a>
+            <h1>Esenciales<br>Elevados</h1>
+            <p>Diseño Sostenible | Colombia 2026</p>
+            <div class="hero-btn-container">
+                <a href="#coleccion" class="btn btn-gold">Explorar Drop 001</a>
+            </div>
         </div>
     </section>
 
     <div class="marquee">
         <div class="marquee-content">
-            <span class="marquee-item">LAYRON 2026</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">MODERN LUXURY</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">HEAVYWEIGHT COTTON</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">COLOMBIA</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">LIMITED EDITION</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">LAYRON 2026</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">MODERN LUXURY</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">HEAVYWEIGHT COTTON</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">COLOMBIA</span> <span class="marquee-item">•</span>
-            <span class="marquee-item">LIMITED EDITION</span>
+            <span class="marquee-item">LAYRON 2026 • MODERN LUXURY • HEAVYWEIGHT COTTON • COLOMBIA • LIMITED EDITION</span>
+            <span class="marquee-item">LAYRON 2026 • MODERN LUXURY • HEAVYWEIGHT COTTON • COLOMBIA • LIMITED EDITION</span>
+            <span class="marquee-item">LAYRON 2026 • MODERN LUXURY • HEAVYWEIGHT COTTON • COLOMBIA • LIMITED EDITION</span>
         </div>
     </div>
 
-    <section class="countdown-section">
-        <p class="countdown-title">Lanzamiento Oficial 2026</p>
+    <section class="countdown-section reveal">
+        <p class="countdown-title">Lanzamiento Oficial</p>
         <div class="timer" id="timer">
             <div class="time-box"><span id="days">00</span><label>Días</label></div><div class="separator">:</div>
             <div class="time-box"><span id="hours">00</span><label>Horas</label></div><div class="separator">:</div>
@@ -308,174 +314,123 @@
         </div>
     </section>
 
-    <section class="founder" id="historia">
+    <section class="founder reveal" id="historia">
         <div class="founder-text">
             <h2>El Origen</h2>
-            <p>Empezar una marca de lujo a los 18 años suena imposible. LAYRON es la prueba de que la visión es más fuerte que el presupuesto. Construyendo desde cero en Colombia.</p>
-            <a href="https://www.youtube.com/@Layron_Official" target="_blank" class="btn">Ver el Documental en YouTube</a>
+            <p>En un mundo de moda rápida, elegimos la pausa. LAYRON nace en Colombia con una sola misión: crear los esenciales definitivos para quienes construyen su propio camino. Calidad sobre cantidad. Visión sobre tendencia.</p>
         </div>
         <div class="founder-img"></div>
     </section>
 
-    <section class="roadmap" id="roadmap">
-        <div class="section-title"><span>El Plan Maestro</span><h3>Hoja de Ruta</h3></div>
+    <section class="roadmap reveal" id="roadmap">
+        <div class="section-title"><span>El Plan</span><h3>Hoja de Ruta</h3></div>
         <div class="roadmap-container">
-            <div class="roadmap-item active"><span class="roadmap-date">Q1 2025</span><h4 class="roadmap-title">Fundamentos</h4><p class="roadmap-desc">Estructuración y comunidad.</p></div>
-            <div class="roadmap-item"><span class="roadmap-date">Q3 2025</span><h4 class="roadmap-title">I+D Textil</h4><p class="roadmap-desc">Desarrollo de prototipos.</p></div>
-            <div class="roadmap-item"><span class="roadmap-date">2026</span><h4 class="roadmap-title">Lanzamiento</h4><p class="roadmap-desc">Drop 001 Exclusivo.</p></div>
+            <div class="roadmap-item">
+                <span class="roadmap-date">Fase 1</span><h4 class="roadmap-title">Génesis</h4>
+                <p class="roadmap-desc">Construcción de comunidad y diseño de prototipos.</p>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-date">Fase 2</span><h4 class="roadmap-title">Materia</h4>
+                <p class="roadmap-desc">Selección de textiles Heavyweight en Medellín.</p>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-date">2026</span><h4 class="roadmap-title">Lanzamiento</h4>
+                <p class="roadmap-desc">Venta exclusiva del primer Drop.</p>
+            </div>
         </div>
     </section>
 
-    <section class="collection" id="coleccion">
-        <div class="section-title">
-            <span>Prototipos</span>
-            <h3>Colección 2026</h3>
-        </div>
+    <section class="collection reveal" id="coleccion">
+        <div class="section-title"><span>Prototipos</span><h3>Colección 2026</h3></div>
         <div class="grid">
             <div class="card" onclick="openModal('tee')">
                 <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=774&auto=format&fit=crop" class="card-img" alt="Camiseta">
-                <div class="card-info">
-                    <h4 class="card-title">Heavyweight Tee</h4>
-                    <span class="card-price">$95.000 COP</span>
-                    <button class="btn-full">Ver Detalles</button>
-                </div>
+                <div class="card-info"><h4 class="card-title">Heavyweight Tee</h4><span class="card-price">$95.000 COP</span></div>
             </div>
             <div class="card" onclick="openModal('jacket')">
                 <img src="https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?q=80&w=774&auto=format&fit=crop" class="card-img" alt="Chaqueta">
-                <div class="card-info">
-                    <h4 class="card-title">The Essential Jacket</h4>
-                    <span class="card-price">$450.000 COP</span>
-                    <button class="btn-full">Ver Detalles</button>
-                </div>
+                <div class="card-info"><h4 class="card-title">The Essential Jacket</h4><span class="card-price">$450.000 COP</span></div>
             </div>
             <div class="card" onclick="openModal('pants')">
                 <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=796&auto=format&fit=crop" class="card-img" alt="Pantalón">
-                <div class="card-info">
-                    <h4 class="card-title">Tailored Trouser</h4>
-                    <span class="card-price">$220.000 COP</span>
-                    <button class="btn-full">Ver Detalles</button>
-                </div>
+                <div class="card-info"><h4 class="card-title">Tailored Trouser</h4><span class="card-price">$220.000 COP</span></div>
             </div>
         </div>
     </section>
 
-    <section class="newsletter" id="unete">
-        <div class="section-title"><span>Acceso Anticipado</span><h3>Sé parte del lanzamiento</h3></div>
-        <form><input type="email" placeholder="Tu correo electrónico"><button type="button" class="btn btn-gold">Suscribirme</button></form>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/layronofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@Layron_Official" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@layronofficial" target="_blank"><i class="fab fa-tiktok"></i></a>
-        </div>
-    </section>
-
-    <footer><div class="footer-logo">LAYRON</div><p>Contacto: empresa.layron@gmail.com</p><br><p>© 2026 LAYRON Brand.</p></footer>
+    <footer><div class="logo" style="margin-bottom: 20px;">LAYRON</div><p>© 2026 LAYRON. All Rights Reserved.</p></footer>
 
     <script>
-        // --- DATOS PRODUCTOS ---
-        const productsDB = {
-            'tee': {
-                name: "Heavyweight Tee",
-                price: 95000,
-                img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=774&auto=format&fit=crop",
-                desc: "La camiseta definitiva. Fabricada en algodón peruano de 240gsm. Corte 'Boxy Fit' estructurado que mantiene la forma todo el día. Cuello reforzado anti-deformación.",
-                specs: ["100% Algodón 240gsm", "Corte Boxy / Oversized", "Pre-encogida", "Hecho en Colombia"]
-            },
-            'jacket': {
-                name: "The Essential Jacket",
-                price: 450000,
-                img: "https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?q=80&w=774&auto=format&fit=crop",
-                desc: "Minimalismo funcional. Una chaqueta ligera pero resistente, perfecta para el clima cambiante de la ciudad. Detalles en herrajes dorados mate y forro de seda.",
-                specs: ["Mezcla Lana/Poliéster", "Cierre YKK Dorado", "Bolsillos Internos", "Corte Regular"]
-            },
-            'pants': {
-                name: "Tailored Trouser",
-                price: 220000,
-                img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=796&auto=format&fit=crop",
-                desc: "La elegancia del sastre con la comodidad del streetwear. Pantalón de tiro medio con pinzas frontales y caída fluida. Ideal para combinar con sneakers o botas.",
-                specs: ["Dril Satinado Premium", "Doble Pinza Frontal", "Basta Recta", "Ajuste en Cintura"]
+        // 1. SCROLL REVEAL (La animación al bajar)
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+                if (revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add('active');
+                }
             }
+        }
+
+        // 2. DATOS PRODUCTOS
+        const productsDB = {
+            'tee': { name: "Heavyweight Tee", price: 95000, img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=774&auto=format&fit=crop", desc: "Algodón 240gsm. Boxy Fit. Hecho para durar.", specs: ["100% Algodón", "240 gsm", "Pre-encogido"] },
+            'jacket': { name: "The Essential Jacket", price: 450000, img: "https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?q=80&w=774&auto=format&fit=crop", desc: "Corte técnico y elegante.", specs: ["Impermeable", "Cierre YKK", "Forro Seda"] },
+            'pants': { name: "Tailored Trouser", price: 220000, img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=796&auto=format&fit=crop", desc: "La mezcla perfecta entre calle y oficina.", specs: ["Dril Satinado", "Corte Recto"] }
         };
 
-        // --- LÓGICA MODAL ---
+        // 3. MODAL Y CARRITO (Lógica simplificada)
         const modal = document.getElementById('productModal');
+        let cart = [];
 
-        function openModal(productId) {
-            const product = productsDB[productId];
-            document.getElementById('modalImg').src = product.img;
-            document.getElementById('modalTitle').innerText = product.name;
-            document.getElementById('modalPrice').innerText = "$" + product.price.toLocaleString('es-CO') + " COP";
-            document.getElementById('modalDesc').innerText = product.desc;
-            
-            const specsList = document.getElementById('modalSpecs');
-            specsList.innerHTML = "";
-            product.specs.forEach(spec => { specsList.innerHTML += `<li>${spec}</li>`; });
-
-            const addBtn = document.getElementById('modalAddBtn');
-            addBtn.onclick = function() { addToCart(product.name, product.price, product.img); closeModal(); };
-
+        function openModal(id) {
+            const p = productsDB[id];
+            document.getElementById('modalImg').src = p.img;
+            document.getElementById('modalTitle').innerText = p.name;
+            document.getElementById('modalPrice').innerText = "$" + p.price.toLocaleString();
+            document.getElementById('modalDesc').innerText = p.desc;
+            document.getElementById('modalSpecs').innerHTML = p.specs.map(s => `<li>${s}</li>`).join('');
+            document.getElementById('modalAddBtn').onclick = () => { addToCart(p); closeModal(); };
             modal.classList.add('active');
         }
-
         function closeModal() { modal.classList.remove('active'); }
-        window.onclick = function(event) { if (event.target == modal) { closeModal(); } }
+        window.onclick = (e) => { if (e.target == modal) closeModal(); }
 
-        // --- CUENTA REGRESIVA ---
-        const launchDate = new Date("Jan 1, 2026 00:00:00").getTime();
-        setInterval(function() {
-            const now = new Date().getTime(); const distance = launchDate - now;
-            if (distance > 0) {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-            }
-        }, 1000);
-
-        // --- CARRITO ---
-        let cart = [];
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('active');
-            document.getElementById('cartOverlay').classList.toggle('active');
+        function addToCart(p) { cart.push(p); updateCart(); toggleCart(); }
+        function toggleCart() { 
+            document.getElementById('cartSidebar').classList.toggle('active'); 
+            document.getElementById('cartOverlay').classList.toggle('active'); 
         }
-        function addToCart(name, price, img) { cart.push({name, price, img}); updateCartUI(); toggleCart(); }
-        function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); }
-        function updateCartUI() {
-            const container = document.getElementById('cartItems');
-            const count = document.getElementById('cartCount');
-            const totalDisplay = document.getElementById('cartTotal');
-            count.innerText = cart.length;
-            let total = 0; cart.forEach(item => total += item.price);
-            totalDisplay.innerText = "$" + total.toLocaleString('es-CO') + " COP";
-            container.innerHTML = '';
-            if (cart.length === 0) { container.innerHTML = '<p style="text-align: center; color: #555; margin-top: 20px;">Tu bolsa está vacía.</p>'; } 
-            else {
-                cart.forEach((item, index) => {
-                    container.innerHTML += `
-                        <div class="cart-item">
-                            <img src="${item.img}" alt="${item.name}">
-                            <div class="cart-item-info">
-                                <div class="cart-item-title">${item.name}</div>
-                                <div class="cart-item-price">$${item.price.toLocaleString('es-CO')}</div>
-                                <span class="remove-item" onclick="removeFromCart(${index})">Eliminar</span>
-                            </div>
-                        </div>`;
-                });
-            }
+        function updateCart() {
+            document.getElementById('cartCount').innerText = cart.length;
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cartTotal').innerText = "$" + total.toLocaleString() + " COP";
+            const itemsDiv = document.getElementById('cartItems');
+            itemsDiv.innerHTML = cart.length ? '' : '<p style="text-align:center;color:#666;margin-top:20px;">Vacío</p>';
+            cart.forEach((item, i) => {
+                itemsDiv.innerHTML += `<div class="cart-item"><img src="${item.img}"><div style="flex:1"><div>${item.name}</div><div style="color:var(--accent-gold)">$${item.price.toLocaleString()}</div><div style="color:#d33;cursor:pointer;font-size:0.8rem;margin-top:5px" onclick="cart.splice(${i},1);updateCart()">Eliminar</div></div></div>`;
+            });
         }
         function checkoutWhatsApp() {
-            if (cart.length === 0) return alert("Tu carrito está vacío");
-            const phoneNumber = "573209247296"; 
-            let message = "Hola *LAYRON*, pedido web:%0A%0A";
-            let total = 0;
-            cart.forEach(item => { message += `- ${item.name} ($${item.price.toLocaleString('es-CO')})%0A`; total += item.price; });
-            message += `%0A*TOTAL: $${total.toLocaleString('es-CO')} COP*`;
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            if (!cart.length) return alert("Carrito vacío");
+            let msg = "Hola LAYRON, pedido: " + cart.map(i => i.name).join(', ') + ". Total: " + document.getElementById('cartTotal').innerText;
+            window.open(`https://wa.me/573209247296?text=${encodeURIComponent(msg)}`, '_blank');
         }
+
+        // 4. CUENTA REGRESIVA
+        const target = new Date("Jan 1, 2026").getTime();
+        setInterval(() => {
+            const diff = target - new Date().getTime();
+            if(diff>0) {
+                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }, 1000);
     </script>
 </body>
 </html>
