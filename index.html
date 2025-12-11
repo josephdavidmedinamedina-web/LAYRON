@@ -21,8 +21,7 @@
             --bg-color: #050505;
             --card-bg: #111111;
             --text-main: #ffffff;
-            /* CAMBIO: Ahora el texto "muted" (secundario) también es blanco para máxima visibilidad */
-            --text-muted: #ffffff; 
+            --text-muted: #ffffff; /* Texto secundario también blanco */
             --accent-gold: #D4AF37;
             --font-heading: 'Cinzel', serif;
             --font-body: 'Lato', sans-serif;
@@ -53,10 +52,8 @@
         .nav-right { display: flex; align-items: center; gap: 40px; }
         .nav-links { display: flex; gap: 35px; }
         
-        /* CAMBIO: Enlaces del menú ahora en blanco puro */
         .nav-links a { position: relative; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2.5px; color: #ffffff; padding-bottom: 5px; }
         
-        /* LÍNEA DORADA (Se mantiene) */
         .nav-links a::after {
             content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 50%;
             background-color: var(--accent-gold); transition: 0.3s ease; transform: translateX(-50%);
@@ -93,18 +90,20 @@
             margin-bottom: 20px; text-transform: uppercase; 
             text-shadow: 0 10px 30px rgba(0,0,0,0.8);
             opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
-            color: #ffffff; /* Blanco puro */
+            color: #ffffff;
         }
         .hero-content p { 
-            font-size: 1.1rem; letter-spacing: 4px; color: #ffffff; /* Blanco puro */
+            font-size: 1.1rem; letter-spacing: 4px; color: #ffffff;
             margin-bottom: 40px; text-transform: uppercase;
             opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
         }
         .hero-btn-container { pointer-events: auto; }
         
+        /* Ajuste del visor 3D para la nueva escena */
         spline-viewer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            filter: brightness(0.8) contrast(1.1) saturate(0.8);
+            /* Filtros más suaves para la nueva escena abstracta */
+            filter: brightness(0.9) contrast(1.05);
         }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -130,15 +129,13 @@
         .countdown-title { color: var(--accent-gold); letter-spacing: 6px; font-size: 0.9rem; margin-bottom: 50px; text-transform: uppercase; font-weight: 700; }
         .timer { display: flex; justify-content: center; gap: 20px; }
         
-        /* ESTILO DEL TEMPORIZADOR (NO SE TOCA: ORO Y LUZ) */
+        /* ESTILO DEL TEMPORIZADOR (ORO Y LUZ INTACTOS) */
         .time-box span { 
             display: block; font-family: var(--font-heading); font-size: 4rem; font-weight: 600;
-            /* Degradado dorado intacto */
             background: linear-gradient(to bottom, #bf953f, #fcf6ba, #aa771c); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px; 
-            /* Luz/Glow intacta */
             filter: drop-shadow(0 5px 15px rgba(212, 175, 55, 0.4));
         }
         .time-box label { font-size: 0.7rem; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; }
@@ -208,7 +205,7 @@
         
         .social-icons { margin-top: 50px; display: flex; justify-content: center; gap: 40px; }
         .social-icons a { 
-            color: #ffffff; /* Iconos blancos */
+            color: #ffffff;
             font-size: 1.8rem; transition: 0.3s; 
             width: 50px; height: 50px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
@@ -324,7 +321,7 @@
     </div>
 
     <section class="hero">
-        <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
+        <spline-viewer url="https://prod.spline.design/kZDDjO5FVGF4Y8aC/scene.splinecode"></spline-viewer>
         
         <div class="hero-content">
             <h1>Esenciales<br>Elevados</h1>
