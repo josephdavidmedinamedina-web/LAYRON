@@ -21,7 +21,7 @@
             --bg-color: #050505;
             --card-bg: #111111;
             --text-main: #ffffff;
-            --text-muted: #cccccc;
+            --text-muted: #ffffff;
             --accent-gold: #D4AF37;
             --font-heading: 'Cinzel', serif;
             --font-body: 'Lato', sans-serif;
@@ -51,7 +51,7 @@
 
         /* LOGO CONTAINER */
         .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-        .logo-img { height: 45px; width: auto; mix-blend-mode: screen; border-radius: 2px; }
+        .logo-img { height: 45px; width: auto; mix-blend-mode: screen; /* Truco para quitar fondo negro */ }
         .logo-text { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 6px; font-weight: 600; color: var(--text-main); text-transform: uppercase; }
 
         .nav-right { display: flex; align-items: center; gap: 40px; }
@@ -87,24 +87,23 @@
             opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
         }
         .hero-btn-container { pointer-events: auto; }
-        
         spline-viewer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; filter: brightness(0.9) contrast(1.05); }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- MARQUEE --- */
         .marquee { 
-            background: #080808; color: #aaaaaa; padding: 15px 0; overflow: hidden; white-space: nowrap; 
-            position: relative; z-index: 5; border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: #080808; color: var(--text-main); padding: 15px 0; overflow: hidden; white-space: nowrap; 
+            position: relative; z-index: 5; border-top: 1px solid rgba(212, 175, 55, 0.1); border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
         .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
-        .marquee-item { font-family: var(--font-body); font-weight: 400; text-transform: uppercase; margin: 0 50px; letter-spacing: 3px; font-size: 0.8rem; opacity: 0.9; }
+        .marquee-item { font-family: var(--font-body); font-weight: 400; text-transform: uppercase; margin: 0 50px; letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* --- SCROLL REVEAL --- */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .section-title { text-align: center; margin-bottom: 80px; }
+        .section-title { text-align: center; margin-bottom: 60px; }
         .section-title span { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; display: block; margin-bottom: 15px; }
         .section-title h3 { font-family: var(--font-heading); font-size: 2.5rem; color: #ffffff; }
 
@@ -141,47 +140,18 @@
         }
         .mood-item:hover .mood-overlay { opacity: 1; }
 
-        /* --- NUEVO ROADMAP (TIMELINE DE LUJO) --- */
-        .roadmap { padding: 120px 10%; background: #080808; position: relative; }
-        /* Línea central dorada */
-        .timeline {
-            position: relative; max-width: 1000px; margin: 0 auto;
+        /* --- ROADMAP --- */
+        .roadmap { padding: 100px 10%; background: #080808; }
+        .roadmap-container { max-width: 800px; margin: 0 auto; border-left: 2px solid rgba(212, 175, 55, 0.2); padding-left: 40px; }
+        .roadmap-item { position: relative; margin-bottom: 60px; }
+        .roadmap-item::before { 
+            content: ''; position: absolute; left: -47px; top: 5px; width: 16px; height: 16px; 
+            background: var(--bg-color); border: 2px solid var(--accent-gold); border-radius: 50%; transition: 0.3s;
         }
-        .timeline::after {
-            content: ''; position: absolute; width: 2px; background: rgba(212, 175, 55, 0.3);
-            top: 0; bottom: 0; left: 50%; margin-left: -1px;
-        }
-        .timeline-item {
-            padding: 10px 40px; position: relative; background-color: inherit; width: 50%;
-        }
-        .timeline-item.left { left: 0; text-align: right; }
-        .timeline-item.right { left: 50%; text-align: left; }
-        
-        /* El punto dorado en la línea */
-        .timeline-item::after {
-            content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background: #000;
-            border: 2px solid var(--accent-gold); top: 25px; border-radius: 50%; z-index: 1;
-        }
-        .timeline-item.right::after { left: -8px; }
-        
-        /* Efecto pulse para la fase actual */
-        .timeline-item.active::after { background: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold); animation: pulse 2s infinite; }
-        
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
-
-        /* Tarjeta de Cristal */
-        .timeline-content {
-            padding: 30px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 4px; position: relative; transition: 0.3s;
-        }
-        .timeline-content:hover { border-color: var(--accent-gold); transform: translateY(-5px); }
-        
-        .timeline-phase { font-family: var(--font-heading); font-size: 3rem; color: rgba(255,255,255,0.05); position: absolute; top: 10px; right: 20px; z-index: 0; }
-        .timeline-item.left .timeline-phase { left: 20px; right: auto; }
-        
-        .timeline-date { color: var(--accent-gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 10px; display: block; position: relative; z-index: 1; }
-        .timeline-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 10px; color: white; position: relative; z-index: 1; }
-        .timeline-desc { color: #cccccc; font-size: 0.95rem; line-height: 1.6; position: relative; z-index: 1; }
+        .roadmap-item:hover::before { background: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold); }
+        .roadmap-date { color: var(--accent-gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .roadmap-title { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 10px; color: white; }
+        .roadmap-desc { color: #ffffff; font-size: 1rem; line-height: 1.6; opacity: 0.9; }
 
         /* --- COLECCIÓN --- */
         .collection { padding: 100px 5%; }
@@ -259,13 +229,6 @@
             .newsletter input { width: 100%; margin-bottom: 15px; }
             .founder { flex-direction: column-reverse; }
             .mood-item { flex: 1 1 50%; height: 250px; }
-            /* Ajuste Roadmap en móvil */
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .timeline-item.right { left: 0; }
-            .timeline-item.left { text-align: left; }
-            .timeline-item::after { left: 23px; }
-            .timeline-item.left .timeline-phase { left: auto; right: 20px; }
         }
     </style>
 </head>
@@ -370,7 +333,7 @@
             <div class="mood-overlay">MATERIA</div>
         </div>
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad2dc?q=80&w=1587&auto=format&fit=crop" class="mood-img" alt="Arquitectura">
+            <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=2070&auto=format&fit=crop" class="mood-img" alt="Arquitectura">
             <div class="mood-overlay">ESTRUCTURA</div>
         </div>
         <div class="mood-item">
@@ -381,33 +344,18 @@
 
     <section class="roadmap reveal" id="roadmap">
         <div class="section-title"><span>El Plan</span><h3>Hoja de Ruta</h3></div>
-        
-        <div class="timeline">
-            <div class="timeline-item left active">
-                <div class="timeline-content">
-                    <span class="timeline-phase">01</span>
-                    <span class="timeline-date">Q1 2025 (EN PROCESO)</span>
-                    <h4 class="timeline-title">Génesis & Capital</h4>
-                    <p class="timeline-desc">Construcción de los cimientos. Ahorro estratégico, desarrollo de identidad de marca y creación de comunidad orgánica.</p>
-                </div>
+        <div class="roadmap-container">
+            <div class="roadmap-item">
+                <span class="roadmap-date">Fase 1</span><h4 class="roadmap-title">Génesis</h4>
+                <p class="roadmap-desc">Construcción de comunidad y diseño de prototipos.</p>
             </div>
-            
-            <div class="timeline-item right">
-                <div class="timeline-content">
-                    <span class="timeline-phase">02</span>
-                    <span class="timeline-date">Q3 2025</span>
-                    <h4 class="timeline-title">I+D Textil</h4>
-                    <p class="timeline-desc">Búsqueda de proveedores en Medellín. Pruebas de algodón Heavyweight (240gsm) y perfeccionamiento del corte "Boxy Fit".</p>
-                </div>
+            <div class="roadmap-item">
+                <span class="roadmap-date">Fase 2</span><h4 class="roadmap-title">Materia</h4>
+                <p class="roadmap-desc">Selección de textiles Heavyweight en Medellín.</p>
             </div>
-            
-            <div class="timeline-item left">
-                <div class="timeline-content">
-                    <span class="timeline-phase">03</span>
-                    <span class="timeline-date">2026</span>
-                    <h4 class="timeline-title">Lanzamiento Oficial</h4>
-                    <p class="timeline-desc">Drop 001. Venta exclusiva de unidades limitadas. Activación de la tienda y envíos nacionales.</p>
-                </div>
+            <div class="roadmap-item">
+                <span class="roadmap-date">2026</span><h4 class="roadmap-title">Lanzamiento</h4>
+                <p class="roadmap-desc">Venta exclusiva del primer Drop.</p>
             </div>
         </div>
     </section>
@@ -469,11 +417,29 @@
             }
         }
 
-        // 2. DATOS PRODUCTOS
+        // 2. DATOS PRODUCTOS (DESCRIPCIONES MEJORADAS)
         const productsDB = {
-            'tee': { name: "Heavyweight Tee", price: 95000, img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=774&auto=format&fit=crop", desc: "Algodón 240gsm. Boxy Fit. Hecho para durar.", specs: ["100% Algodón", "240 gsm", "Pre-encogido"] },
-            'jacket': { name: "The Essential Jacket", price: 450000, img: "https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?q=80&w=774&auto=format&fit=crop", desc: "Corte técnico y elegante.", specs: ["Impermeable", "Cierre YKK", "Forro Seda"] },
-            'pants': { name: "Tailored Trouser", price: 220000, img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=796&auto=format&fit=crop", desc: "La mezcla perfecta entre calle y oficina.", specs: ["Dril Satinado", "Corte Recto"] }
+            'tee': { 
+                name: "Heavyweight Tee", 
+                price: 95000, 
+                img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=774&auto=format&fit=crop", 
+                desc: "Redefiniendo el básico. Confeccionada en algodón premium de 240 GSM, esta pieza ofrece una caída estructurada que realza la silueta. Su corte Boxy Fit y cuello Rib reforzado garantizan una presencia imponente y durabilidad absoluta. Más que una camiseta, una declaración de intenciones.", 
+                specs: ["Algodón Premium 240 GSM", "Corte Boxy / Oversized", "Pre-encogida", "Hecho en Colombia"] 
+            },
+            'jacket': { 
+                name: "The Essential Jacket", 
+                price: 450000, 
+                img: "https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?q=80&w=774&auto=format&fit=crop", 
+                desc: "Arquitectura en movimiento. Una silueta bomber depurada, diseñada para dominar el clima urbano con sofisticación. Tejido técnico repelente al agua con forro de tacto seda. Los herrajes en oro mate añaden el contraste final a una prenda construida para durar décadas, no temporadas.", 
+                specs: ["Tejido Técnico Impermeable", "Cierre YKK Dorado Mate", "Forro Tacto Seda", "Bolsillos Internos de Seguridad"] 
+            },
+            'pants': { 
+                name: "Tailored Trouser", 
+                price: 220000, 
+                img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=796&auto=format&fit=crop", 
+                desc: "La fusión perfecta entre sastrería italiana y la calle. Corte recto con doble pinza frontal que otorga amplitud y movimiento. Fabricado en dril satinado de alto gramaje, ofrece la elegancia de un pantalón de vestir con la resistencia necesaria para el uso diario. Versatilidad elevada.", 
+                specs: ["Dril Satinado Heavyweight", "Doble Pinza Frontal", "Corte Recto (Straight Leg)", "Ajuste Sastrero en Cintura"] 
+            }
         };
 
         // 3. MODAL Y CARRITO
