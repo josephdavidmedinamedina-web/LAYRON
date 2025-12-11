@@ -21,7 +21,7 @@
             --bg-color: #050505;
             --card-bg: #111111;
             --text-main: #ffffff;
-            --text-muted: #ffffff; /* Texto secundario también blanco */
+            --text-muted: #ffffff; /* Textos blancos */
             --accent-gold: #D4AF37;
             --font-heading: 'Cinzel', serif;
             --font-body: 'Lato', sans-serif;
@@ -51,9 +51,7 @@
         .logo { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 6px; font-weight: 600; color: var(--text-main); text-transform: uppercase; }
         .nav-right { display: flex; align-items: center; gap: 40px; }
         .nav-links { display: flex; gap: 35px; }
-        
         .nav-links a { position: relative; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2.5px; color: #ffffff; padding-bottom: 5px; }
-        
         .nav-links a::after {
             content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 50%;
             background-color: var(--accent-gold); transition: 0.3s ease; transform: translateX(-50%);
@@ -99,10 +97,8 @@
         }
         .hero-btn-container { pointer-events: auto; }
         
-        /* Ajuste del visor 3D para la nueva escena */
         spline-viewer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            /* Filtros más suaves para la nueva escena abstracta */
             filter: brightness(0.9) contrast(1.05);
         }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -124,18 +120,17 @@
         .section-title span { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; display: block; margin-bottom: 15px; }
         .section-title h3 { font-family: var(--font-heading); font-size: 2.5rem; color: #ffffff; }
 
-        /* --- CUENTA REGRESIVA (INTACTA) --- */
+        /* --- CUENTA REGRESIVA --- */
         .countdown-section { padding: 100px 20px; text-align: center; background: radial-gradient(circle at center, #151515 0%, #050505 80%); border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
         .countdown-title { color: var(--accent-gold); letter-spacing: 6px; font-size: 0.9rem; margin-bottom: 50px; text-transform: uppercase; font-weight: 700; }
         .timer { display: flex; justify-content: center; gap: 20px; }
         
-        /* ESTILO DEL TEMPORIZADOR (ORO Y LUZ INTACTOS) */
         .time-box span { 
             display: block; font-family: var(--font-heading); font-size: 4rem; font-weight: 600;
             background: linear-gradient(to bottom, #bf953f, #fcf6ba, #aa771c); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 15px; 
+            /* LUZ DEL TIMER (INTACTA) */
             filter: drop-shadow(0 5px 15px rgba(212, 175, 55, 0.4));
         }
         .time-box label { font-size: 0.7rem; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; }
@@ -167,16 +162,35 @@
         .roadmap-title { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 10px; color: white; }
         .roadmap-desc { color: #ffffff; font-size: 1rem; line-height: 1.6; opacity: 0.9; }
 
-        /* --- COLECCIÓN --- */
+        /* --- COLECCIÓN (LUZ RESTAURADA) --- */
         .collection { padding: 100px 5%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        
         .card { 
             background: var(--card-bg); position: relative; overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.05); cursor: pointer; 
+            transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .card:hover { transform: translateY(-15px); border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .card-img { width: 100%; height: 450px; object-fit: cover; filter: grayscale(40%) brightness(0.9); transition: 0.7s ease; }
-        .card:hover .card-img { filter: grayscale(0%) brightness(1.1); transform: scale(1.05); }
+        
+        /* AQUÍ ESTÁ LA LUZ QUE FALTABA */
+        .card:hover { 
+            transform: translateY(-15px); 
+            border-color: var(--accent-gold); 
+            /* Efecto de luz dorada restaurado */
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.05); 
+        }
+        
+        .card-img { 
+            width: 100%; height: 450px; object-fit: cover; 
+            filter: grayscale(40%) brightness(0.9); 
+            transition: 0.7s ease; 
+        }
+        
+        .card:hover .card-img { 
+            filter: grayscale(0%) brightness(1.2); /* Más brillo al pasar el mouse */
+            transform: scale(1.05); 
+        }
+        
         .card-info { padding: 30px; text-align: center; background: linear-gradient(to top, #111 80%, transparent); position: absolute; bottom: 0; width: 100%; }
         .card-title { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; color: #ffffff; }
         .card-price { color: var(--accent-gold); font-size: 1rem; }
