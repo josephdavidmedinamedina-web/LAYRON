@@ -140,18 +140,36 @@
         }
         .mood-item:hover .mood-overlay { opacity: 1; }
 
-        /* --- ROADMAP --- */
-        .roadmap { padding: 100px 10%; background: #080808; }
-        .roadmap-container { max-width: 800px; margin: 0 auto; border-left: 2px solid rgba(212, 175, 55, 0.2); padding-left: 40px; }
-        .roadmap-item { position: relative; margin-bottom: 60px; }
-        .roadmap-item::before { 
-            content: ''; position: absolute; left: -47px; top: 5px; width: 16px; height: 16px; 
-            background: var(--bg-color); border: 2px solid var(--accent-gold); border-radius: 50%; transition: 0.3s;
+        /* --- ROADMAP ZIG-ZAG (RESTAURADO) --- */
+        .roadmap { padding: 120px 10%; background: #080808; position: relative; }
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto; }
+        .timeline::after {
+            content: ''; position: absolute; width: 2px; background: rgba(212, 175, 55, 0.3);
+            top: 0; bottom: 0; left: 50%; margin-left: -1px;
         }
-        .roadmap-item:hover::before { background: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold); }
-        .roadmap-date { color: var(--accent-gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 10px; display: block; }
-        .roadmap-title { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 10px; color: white; }
-        .roadmap-desc { color: #ffffff; font-size: 1rem; line-height: 1.6; opacity: 0.9; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-item.left { left: 0; text-align: right; }
+        .timeline-item.right { left: 50%; text-align: left; }
+        
+        .timeline-item::after {
+            content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background: #000;
+            border: 2px solid var(--accent-gold); top: 25px; border-radius: 50%; z-index: 1;
+        }
+        .timeline-item.right::after { left: -8px; }
+        .timeline-item.active::after { background: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
+
+        .timeline-content {
+            padding: 30px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px; position: relative; transition: 0.3s;
+        }
+        .timeline-content:hover { border-color: var(--accent-gold); transform: translateY(-5px); }
+        
+        .timeline-phase { font-family: var(--font-heading); font-size: 3rem; color: rgba(255,255,255,0.05); position: absolute; top: 10px; right: 20px; z-index: 0; }
+        .timeline-item.left .timeline-phase { left: 20px; right: auto; }
+        .timeline-date { color: var(--accent-gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 10px; display: block; position: relative; z-index: 1; }
+        .timeline-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 10px; color: white; position: relative; z-index: 1; }
+        .timeline-desc { color: #cccccc; font-size: 0.95rem; line-height: 1.6; position: relative; z-index: 1; }
 
         /* --- COLECCIÓN --- */
         .collection { padding: 100px 5%; }
@@ -195,13 +213,13 @@
         
         .modal-content { 
             background: #0f0f0f; 
-            width: 80%; /* MENOS ANCHO (Antes 95%) */
-            max-width: 900px; /* MENOS ANCHO MÁXIMO (Antes 1100px) */
+            width: 80%; 
+            max-width: 900px; 
             display: flex; 
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Borde sutil */
+            border: 1px solid rgba(255, 255, 255, 0.08); 
             box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8); 
             animation: modalUp 0.5s ease forwards;
-            border-radius: 4px; /* Bordes suaves */
+            border-radius: 4px;
             overflow: hidden;
         }
         
@@ -211,7 +229,7 @@
         .modal-left img { width: 100%; height: 100%; object-fit: cover; }
         
         .modal-right { 
-            flex: 1; padding: 50px; /* Buen espacio interno */
+            flex: 1; padding: 50px; 
             display: flex; flex-direction: column; justify-content: center; 
             position: relative; background: radial-gradient(circle at top right, #1a1a1a 0%, #0f0f0f 60%);
         }
@@ -285,6 +303,14 @@
             .newsletter input { width: 100%; margin-bottom: 15px; }
             .founder { flex-direction: column-reverse; }
             .mood-item { flex: 1 1 50%; height: 250px; }
+            
+            /* Ajuste Roadmap en móvil */
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.right { left: 0; }
+            .timeline-item.left { text-align: left; }
+            .timeline-item::after { left: 23px; }
+            .timeline-item.left .timeline-phase { left: auto; right: 20px; }
         }
     </style>
 </head>
@@ -402,18 +428,33 @@
 
     <section class="roadmap reveal" id="roadmap">
         <div class="section-title"><span>El Plan</span><h3>Hoja de Ruta</h3></div>
-        <div class="roadmap-container">
-            <div class="roadmap-item">
-                <span class="roadmap-date">Fase 1</span><h4 class="roadmap-title">Génesis</h4>
-                <p class="roadmap-desc">Construcción de comunidad y diseño de prototipos.</p>
+        
+        <div class="timeline">
+            <div class="timeline-item left active">
+                <div class="timeline-content">
+                    <span class="timeline-phase">01</span>
+                    <span class="timeline-date">Q1 2025 (EN PROCESO)</span>
+                    <h4 class="timeline-title">Génesis & Capital</h4>
+                    <p class="timeline-desc">Construcción de los cimientos. Ahorro estratégico, desarrollo de identidad de marca y creación de comunidad orgánica.</p>
+                </div>
             </div>
-            <div class="roadmap-item">
-                <span class="roadmap-date">Fase 2</span><h4 class="roadmap-title">Materia</h4>
-                <p class="roadmap-desc">Selección de textiles Heavyweight en Medellín.</p>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-phase">02</span>
+                    <span class="timeline-date">Q3 2025</span>
+                    <h4 class="timeline-title">I+D Textil</h4>
+                    <p class="timeline-desc">Búsqueda de proveedores en Medellín. Pruebas de algodón Heavyweight (240gsm) y perfeccionamiento del corte "Boxy Fit".</p>
+                </div>
             </div>
-            <div class="roadmap-item">
-                <span class="roadmap-date">2026</span><h4 class="roadmap-title">Lanzamiento</h4>
-                <p class="roadmap-desc">Venta exclusiva del primer Drop.</p>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-phase">03</span>
+                    <span class="timeline-date">2026</span>
+                    <h4 class="timeline-title">Lanzamiento Oficial</h4>
+                    <p class="timeline-desc">Drop 001. Venta exclusiva de unidades limitadas. Activación de la tienda y envíos nacionales.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -475,7 +516,7 @@
             }
         }
 
-        // 2. DATOS PRODUCTOS
+        // 2. DATOS PRODUCTOS (DESCRIPCIONES MEJORADAS)
         const productsDB = {
             'tee': { 
                 name: "Heavyweight Tee", 
