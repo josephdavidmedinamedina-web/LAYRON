@@ -20,7 +20,7 @@
             --card-bg: #111111;
             --text-main: #ffffff;
             --text-muted: #888888;
-            --accent-gold: #D4AF37; /* El color dorado de la marca */
+            --accent-gold: #D4AF37;
             --font-heading: 'Cinzel', serif;
             --font-body: 'Lato', sans-serif;
         }
@@ -32,56 +32,81 @@
             color: var(--text-main);
             font-family: var(--font-body);
             overflow-x: hidden;
+            cursor: none; /* Ocultamos el cursor por defecto para usar el personalizado */
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
         button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
 
-        /* --- NUEVA BARRA DE NAVEGACIÓN (PRO LUXURY) --- */
+        /* --- CURSOR PERSONALIZADO --- */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-gold);
+            position: fixed;
+            top: 0; left: 0;
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: fixed;
+            top: 0; left: 0;
+            border-radius: 50%;
+            z-index: 9998;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease-out;
+        }
+        /* Efecto del cursor al pasar por enlaces */
+        body:has(a:hover) .cursor-outline,
+        body:has(button:hover) .cursor-outline,
+        body:has(.card:hover) .cursor-outline {
+            width: 60px;
+            height: 60px;
+            border-color: var(--accent-gold);
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        /* --- NAV PRO (GLASSMORPHISM) --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 25px 6%; /* Más espacio lateral para elegancia */
+            padding: 25px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
-            /* EFECTO CRISTAL (GLASSMORPHISM) */
-            background: rgba(5, 5, 5, 0.7); /* Transparente */
-            backdrop-filter: blur(12px); /* Desenfoque del fondo */
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.08); /* Borde sutil */
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             transition: all 0.4s ease;
         }
-
         .logo { 
             font-family: var(--font-heading); 
             font-size: 1.8rem; 
-            letter-spacing: 6px; /* Espaciado editorial */
+            letter-spacing: 6px; 
             font-weight: 600; 
             color: var(--text-main);
             text-transform: uppercase;
         }
-        
         .nav-right { display: flex; align-items: center; gap: 40px; }
         .nav-links { display: flex; gap: 35px; }
-
-        /* Enlaces del menú */
         .nav-links a { 
             position: relative; 
             text-transform: uppercase; 
             font-size: 0.75rem; 
             letter-spacing: 2.5px; 
             color: #cccccc; 
-            font-weight: 400;
             padding-bottom: 5px;
         }
-
-        /* Animación de la línea dorada al pasar el mouse */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -93,41 +118,21 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-
         .nav-links a:hover { color: white; }
         .nav-links a:hover::after { width: 100%; }
 
-        /* Icono del Carrito */
-        .cart-icon { 
-            position: relative; 
-            cursor: pointer; 
-            font-size: 1.1rem; 
-            color: var(--text-main); 
-            transition: transform 0.3s;
-        }
-        .cart-icon:hover { 
-            transform: scale(1.1); 
-            color: var(--accent-gold); 
-        }
-
+        /* Icono Carrito */
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.1rem; color: var(--text-main); transition: transform 0.3s; }
+        .cart-icon:hover { transform: scale(1.1); color: var(--accent-gold); }
         .cart-count {
-            position: absolute;
-            top: -6px;
-            right: -8px;
-            background: var(--accent-gold);
-            color: black;
-            font-size: 0.6rem;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 700;
-            box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+            position: absolute; top: -6px; right: -8px;
+            background: var(--accent-gold); color: black;
+            font-size: 0.6rem; width: 16px; height: 16px;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-weight: 700; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
         }
 
-        /* --- HERO (Banner Principal) --- */
+        /* --- HERO --- */
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');
@@ -143,115 +148,103 @@
         .hero-content h1 { font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
         .hero-content p { font-size: 1rem; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 40px; text-transform: uppercase; }
         
-        /* Botones Generales */
         .btn {
-            padding: 15px 40px;
-            border: 1px solid var(--text-main);
-            background: transparent;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
+            padding: 15px 40px; border: 1px solid var(--text-main); background: transparent; color: var(--text-main);
+            text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; display: inline-block;
         }
         .btn:hover { background: var(--text-main); color: var(--bg-color); }
         .btn-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
         .btn-gold:hover { background: var(--accent-gold); color: var(--bg-color); }
-        
-        .btn-full { 
-            width: 100%; 
-            text-align: center; 
-            margin-top: 10px; 
-            border: 1px solid var(--accent-gold); 
-            background: transparent; 
-            color: var(--accent-gold); 
-            padding: 10px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            font-size: 0.8rem; 
-            transition: 0.3s;
-        }
-        .btn-full:hover { background: var(--accent-gold); color: black; }
 
-        /* --- CUENTA REGRESIVA (METÁLICA + LUZ) --- */
+        /* --- INFINITE MARQUEE (CINTA MOVIMIENTO) --- */
+        .marquee {
+            background: var(--accent-gold);
+            color: black;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 2;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+        .marquee-item {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 30px;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- CUENTA REGRESIVA PRO --- */
         .countdown-section {
             padding: 100px 20px;
             text-align: center;
-            /* Fondo Radial para efecto de foco de luz */
             background: radial-gradient(circle at center, #1a1a1a 0%, #000000 80%);
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
             position: relative;
         }
-        
         .countdown-section::before {
+            content: ''; position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 2px; background: var(--accent-gold); opacity: 0.5;
+        }
+        .countdown-title { 
+            color: var(--accent-gold); letter-spacing: 6px; font-size: 0.9rem; margin-bottom: 50px; 
+            text-transform: uppercase; font-family: var(--font-body); font-weight: 700;
+        }
+        .timer { display: flex; justify-content: center; align-items: flex-start; gap: 20px; }
+        .time-box { display: flex; flex-direction: column; align-items: center; padding: 0 15px; }
+        .time-box span { 
+            display: block; font-family: var(--font-heading); font-size: 4rem; line-height: 1; font-weight: 600;
+            background: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728, #aa771c);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.5)); margin-bottom: 15px;
+        }
+        .time-box label { font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 3px; }
+        .separator { font-family: var(--font-heading); font-size: 3rem; color: rgba(212, 175, 55, 0.3); margin-top: 5px; }
+
+        /* --- ROADMAP (HOJA DE RUTA) --- */
+        .roadmap { padding: 80px 10%; background: #080808; text-align: center; }
+        .roadmap-container {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto 0;
+            padding-left: 30px; /* Espacio para la línea en móvil */
+            border-left: 2px solid rgba(212, 175, 55, 0.3);
+            text-align: left;
+        }
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 30px;
+        }
+        .roadmap-item::before {
             content: '';
             position: absolute;
-            top: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: var(--accent-gold);
-            opacity: 0.5;
+            left: -36px; /* Ajuste para centrar en la línea */
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-color);
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            z-index: 2;
         }
-
-        .countdown-title { 
-            color: var(--accent-gold); 
-            letter-spacing: 6px; 
-            font-size: 0.9rem; 
-            margin-bottom: 50px; 
-            text-transform: uppercase;
-            font-family: var(--font-body);
-            font-weight: 700;
-        }
-
-        .timer { 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-start; 
-            gap: 20px; 
-        }
-
-        .time-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            padding: 0 15px;
-        }
-
-        /* TEXTO EFECTO ORO METÁLICO */
-        .time-box span { 
-            display: block; 
-            font-family: var(--font-heading); 
-            font-size: 4rem; 
-            line-height: 1;
-            font-weight: 600;
-            background: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728, #aa771c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.5));
-            margin-bottom: 15px;
-        }
-
-        .time-box label { 
-            font-size: 0.7rem; 
-            color: #555; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            font-weight: 400;
-        }
+        .roadmap-date { color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 5px; display: block; }
+        .roadmap-title { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 10px; color: white; }
+        .roadmap-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
         
-        .separator {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            color: rgba(212, 175, 55, 0.3);
-            margin-top: 5px;
-        }
+        /* Highlight para la fase actual */
+        .roadmap-item.active::before { background: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold); }
 
-        /* --- HISTORIA DEL FUNDADOR --- */
+        /* --- HISTORIA --- */
         .founder { padding: 100px 10%; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
         .founder-text { flex: 1; min-width: 300px; }
         .founder-text h2 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px; }
@@ -262,7 +255,7 @@
             background-size: cover; filter: grayscale(100%);
         }
 
-        /* --- COLECCIÓN (PRO) --- */
+        /* --- COLECCIÓN PRO --- */
         .collection { padding: 80px 5%; }
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title span { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; }
@@ -270,43 +263,29 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
         .card { 
-            background: var(--card-bg); 
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-            position: relative; 
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: var(--card-bg); transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
         }
-
         .card-img { 
-            width: 100%; 
-            height: 400px; 
-            object-fit: cover; 
-            filter: grayscale(30%) brightness(0.9);
-            transition: all 0.6s ease; 
+            width: 100%; height: 400px; object-fit: cover; filter: grayscale(30%) brightness(0.9); transition: all 0.6s ease; 
         }
-
-        .card:hover { 
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
-            border-color: rgba(212, 175, 55, 0.3); 
-        }
-
-        .card:hover .card-img { 
-            transform: scale(1.05);
-            filter: grayscale(0%) brightness(1.1);
-        }
-
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); border-color: rgba(212, 175, 55, 0.3); }
+        .card:hover .card-img { transform: scale(1.05); filter: grayscale(0%) brightness(1.1); }
         .card-info { padding: 25px 20px; text-align: center; position: relative; z-index: 2; background: var(--card-bg); }
         .card-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .card-price { color: var(--accent-gold); font-size: 0.9rem; font-weight: 300; margin-bottom: 15px; display: block; }
+        .btn-full { 
+            width: 100%; text-align: center; margin-top: 10px; border: 1px solid var(--accent-gold); 
+            background: transparent; color: var(--accent-gold); padding: 10px; text-transform: uppercase; 
+            letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s;
+        }
+        .btn-full:hover { background: var(--accent-gold); color: black; }
 
         /* --- NEWSLETTER --- */
         .newsletter {
-            padding: 100px 20px;
-            text-align: center;
+            padding: 100px 20px; text-align: center;
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-attachment: fixed;
+            background-size: cover; background-attachment: fixed;
         }
         .newsletter input { padding: 15px; width: 300px; background: transparent; border: 1px solid var(--text-main); color: var(--text-main); margin-right: 10px; }
         .social-icons { margin-top: 40px; font-size: 1.8rem; display: flex; justify-content: center; gap: 40px; }
@@ -319,18 +298,9 @@
 
         /* --- CARRITO SIDEBAR --- */
         .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 350px;
-            height: 100vh;
-            background: #111;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-            transition: 0.4s;
-            z-index: 2000;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
+            position: fixed; top: 0; right: -400px; width: 350px; height: 100vh;
+            background: #111; box-shadow: -5px 0 15px rgba(0,0,0,0.5); transition: 0.4s;
+            z-index: 2000; padding: 20px; display: flex; flex-direction: column;
         }
         .cart-sidebar.active { right: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px; }
@@ -343,41 +313,40 @@
         .cart-item-title { font-size: 0.8rem; margin-bottom: 5px; }
         .cart-item-price { color: var(--accent-gold); font-size: 0.8rem; }
         .remove-item { color: #ff4444; cursor: pointer; font-size: 0.7rem; text-decoration: underline; margin-top: 5px; display: inline-block; }
-        
         .cart-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .cart-total { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; font-weight: bold; }
         .cart-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1500;
-            display: none;
+            background: rgba(0,0,0,0.7); z-index: 1500; display: none;
         }
         .cart-overlay.active { display: block; }
 
-        /* Responsive Móvil */
+        /* Responsive */
         @media(max-width: 768px) {
             .hero-content h1 { font-size: 2rem; }
             .nav-links { display: none; }
             .founder { flex-direction: column; }
             .cart-sidebar { width: 100%; }
-            
-            /* Ajuste de cuenta regresiva en móvil */
             .time-box span { font-size: 2rem; }
             .timer { gap: 5px; }
             .time-box { padding: 0 5px; }
             .separator { font-size: 1.5rem; margin-top: 5px; }
+            .newsletter input { width: 100%; margin-bottom: 10px; }
         }
     </style>
 </head>
 <body>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
 
     <nav>
         <div class="logo">LAYRON</div>
         <div class="nav-right">
             <div class="nav-links">
                 <a href="#historia">Historia</a>
+                <a href="#roadmap">Roadmap</a>
                 <a href="#coleccion">Colección</a>
-                <a href="#unete">Únete</a>
             </div>
             <div class="cart-icon" onclick="toggleCart()">
                 <i class="fas fa-shopping-bag"></i>
@@ -414,28 +383,40 @@
         </div>
     </section>
 
+    <div class="marquee">
+        <div class="marquee-content">
+            <span class="marquee-item">LAYRON 2026</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">MODERN LUXURY</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">HEAVYWEIGHT COTTON</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">COLOMBIA</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">LIMITED EDITION</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">LAYRON 2026</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">MODERN LUXURY</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">HEAVYWEIGHT COTTON</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">COLOMBIA</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">LIMITED EDITION</span>
+        </div>
+    </div>
+
     <section class="countdown-section">
         <p class="countdown-title">Lanzamiento Oficial 2026</p>
         <div class="timer" id="timer">
-            <div class="time-box">
-                <span id="days">00</span>
-                <label>Días</label>
-            </div>
+            <div class="time-box"><span id="days">00</span><label>Días</label></div>
             <div class="separator">:</div>
-            <div class="time-box">
-                <span id="hours">00</span>
-                <label>Horas</label>
-            </div>
+            <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
             <div class="separator">:</div>
-            <div class="time-box">
-                <span id="minutes">00</span>
-                <label>Minutos</label>
-            </div>
+            <div class="time-box"><span id="minutes">00</span><label>Minutos</label></div>
             <div class="separator">:</div>
-            <div class="time-box">
-                <span id="seconds">00</span>
-                <label>Segundos</label>
-            </div>
+            <div class="time-box"><span id="seconds">00</span><label>Segundos</label></div>
         </div>
     </section>
 
@@ -447,6 +428,30 @@
             <a href="https://www.youtube.com/@Layron_Official" target="_blank" class="btn">Ver el Documental en YouTube</a>
         </div>
         <div class="founder-img"></div>
+    </section>
+
+    <section class="roadmap" id="roadmap">
+        <div class="section-title">
+            <span>El Plan Maestro</span>
+            <h3>Hoja de Ruta</h3>
+        </div>
+        <div class="roadmap-container">
+            <div class="roadmap-item active">
+                <span class="roadmap-date">Q1 2025 (EN PROCESO)</span>
+                <h4 class="roadmap-title">Fundamentos & Capital</h4>
+                <p class="roadmap-desc">Ahorro estratégico, estructuración de la marca y creación de comunidad orgánica en redes sociales.</p>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-date">Q3 2025</span>
+                <h4 class="roadmap-title">I+D Textil</h4>
+                <p class="roadmap-desc">Búsqueda de proveedores en Medellín. Pruebas de algodón Heavyweight y diseño de patrones.</p>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-date">2026</span>
+                <h4 class="roadmap-title">Lanzamiento Oficial</h4>
+                <p class="roadmap-desc">Drop 001. Edición limitada de camisetas y accesorios esenciales. Venta exclusiva.</p>
+            </div>
+        </div>
     </section>
 
     <section class="collection" id="coleccion">
@@ -507,64 +512,62 @@
     </footer>
 
     <script>
-        // 1. Cuenta Regresiva (ACTUALIZADA con Minutos y Segundos)
+        // 1. LÓGICA DEL CURSOR
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+
+        window.addEventListener("mousemove", function (e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({
+                left: `${posX}px`, top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // 2. CUENTA REGRESIVA
         const launchDate = new Date("Jan 1, 2026 00:00:00").getTime();
-        
         setInterval(function() {
             const now = new Date().getTime();
             const distance = launchDate - now;
-            
             if (distance > 0) {
-                // Matemáticas del tiempo
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Actualizar HTML (agregando un '0' si es menor a 10 para estética)
                 document.getElementById("days").innerText = days < 10 ? "0" + days : days;
                 document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
                 document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
                 document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
             } else {
-                // Si la fecha llegó
                 document.getElementById("days").innerText = "00";
-                document.getElementById("hours").innerText = "00";
-                document.getElementById("minutes").innerText = "00";
-                document.getElementById("seconds").innerText = "00";
             }
         }, 1000);
 
-        // 2. Lógica del Carrito
+        // 3. CARRITO & WHATSAPP
         let cart = [];
-        
         function toggleCart() {
             document.getElementById('cartSidebar').classList.toggle('active');
             document.getElementById('cartOverlay').classList.toggle('active');
         }
-
         function addToCart(name, price, img) {
             cart.push({name, price, img});
             updateCartUI();
             toggleCart(); 
         }
-
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartUI();
         }
-
         function updateCartUI() {
             const container = document.getElementById('cartItems');
             const count = document.getElementById('cartCount');
             const totalDisplay = document.getElementById('cartTotal');
-            
             count.innerText = cart.length;
-
             let total = 0;
             cart.forEach(item => total += item.price);
             totalDisplay.innerText = "$" + total.toLocaleString('es-CO') + " COP";
-
             container.innerHTML = '';
             if (cart.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #555; margin-top: 20px;">Tu bolsa está vacía.</p>';
@@ -583,24 +586,17 @@
                 });
             }
         }
-
-        // 3. Checkout WhatsApp
         function checkoutWhatsApp() {
             if (cart.length === 0) return alert("Tu carrito está vacío");
-
             const phoneNumber = "573209247296"; 
-
             let message = "Hola *LAYRON*, estoy interesado en pre-ordenar los siguientes artículos:%0A%0A";
             let total = 0;
-
             cart.forEach(item => {
                 message += `- ${item.name} ($${item.price.toLocaleString('es-CO')})%0A`;
                 total += item.price;
             });
-
             message += `%0A*TOTAL A PAGAR: $${total.toLocaleString('es-CO')} COP*`;
             message += `%0A%0AQuedo atento a los medios de pago. Gracias.`;
-            
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
     </script>
