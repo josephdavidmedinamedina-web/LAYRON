@@ -49,18 +49,20 @@
             border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
         }
 
-        /* LOGO CONTAINER (NUEVO) */
+        /* LOGO CONTAINER */
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px; /* Espacio entre imagen y texto */
+            gap: 15px;
             cursor: pointer;
         }
 
+        /* --- AQUÍ ESTÁ EL TRUCO PARA EL FONDO DEL LOGO --- */
         .logo-img {
-            height: 45px; /* Tamaño del logo */
+            height: 45px;
             width: auto;
-            border-radius: 2px; /* Borde muy sutil */
+            /* ESTA LÍNEA ES MAGIA: hace transparente el fondo negro de la imagen */
+            mix-blend-mode: screen;
         }
 
         .logo-text { 
