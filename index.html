@@ -5,18 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAYRON | Modern Luxury Essentials</title>
     
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3531/3531847.png" type="image/png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+        /* --- VARIABLES DE DISEÑO --- */
         :root {
             --bg-color: #050505;
             --card-bg: #111111;
             --text-main: #ffffff;
             --text-muted: #888888;
-            --accent-gold: #D4AF37;
+            --accent-gold: #D4AF37; /* El color dorado de la marca */
             --font-heading: 'Cinzel', serif;
             --font-body: 'Lato', sans-serif;
         }
@@ -27,14 +31,14 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: var(--font-body);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Evita scroll horizontal no deseado */
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
         button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
 
-        /* NAV */
+        /* --- BARRA DE NAVEGACIÓN --- */
         nav {
             position: fixed;
             top: 0;
@@ -43,7 +47,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 5, 5, 0.95);
+            background: rgba(5, 5, 5, 0.95); /* Casi negro solido */
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -55,7 +59,7 @@
         .nav-links a { text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: var(--text-muted); }
         .nav-links a:hover { color: var(--accent-gold); }
 
-        /* CART ICON */
+        /* Icono del Carrito */
         .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; color: var(--text-main); }
         .cart-icon:hover { color: var(--accent-gold); }
         .cart-count {
@@ -74,13 +78,14 @@
             font-weight: bold;
         }
 
-        /* HERO */
+        /* --- HERO (Banner Principal) --- */
         .hero {
             height: 100vh;
+            /* Fondo con superposición oscura para que se lea el texto */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: fixed; /* Efecto Parallax simple */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -90,6 +95,7 @@
         .hero-content h1 { font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
         .hero-content p { font-size: 1rem; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 40px; text-transform: uppercase; }
         
+        /* Botones Generales */
         .btn {
             padding: 15px 40px;
             border: 1px solid var(--text-main);
@@ -105,10 +111,24 @@
         .btn:hover { background: var(--text-main); color: var(--bg-color); }
         .btn-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
         .btn-gold:hover { background: var(--accent-gold); color: var(--bg-color); }
-        .btn-full { width: 100%; text-align: center; margin-top: 10px; border: 1px solid var(--accent-gold); background: transparent; color: var(--accent-gold); padding: 10px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s; }
+        
+        /* Botón de "Agregar" */
+        .btn-full { 
+            width: 100%; 
+            text-align: center; 
+            margin-top: 10px; 
+            border: 1px solid var(--accent-gold); 
+            background: transparent; 
+            color: var(--accent-gold); 
+            padding: 10px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-size: 0.8rem; 
+            transition: 0.3s;
+        }
         .btn-full:hover { background: var(--accent-gold); color: black; }
 
-        /* COUNTDOWN */
+        /* --- CUENTA REGRESIVA --- */
         .countdown-section {
             padding: 60px 20px;
             text-align: center;
@@ -120,7 +140,7 @@
         .time-box span { display: block; font-family: var(--font-heading); font-size: 2.5rem; }
         .time-box label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* FOUNDER STORY */
+        /* --- HISTORIA DEL FUNDADOR --- */
         .founder { padding: 100px 10%; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
         .founder-text { flex: 1; min-width: 300px; }
         .founder-text h2 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px; }
@@ -131,49 +151,48 @@
             background-size: cover; filter: grayscale(100%);
         }
 
-        /* --- ESTILOS DE LA COLECCIÓN ACTUALIZADOS (EFECTO PRO) --- */
+        /* --- COLECCIÓN (CSS AVANZADO PRO) --- */
         .collection { padding: 80px 5%; }
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title span { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; }
         .section-title h3 { font-family: var(--font-heading); font-size: 2rem; margin-top: 10px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        /* Contenedor de la tarjeta */
+        /* Tarjeta del Producto */
         .card { 
             background: var(--card-bg); 
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
             position: relative; 
-            overflow: hidden; /* Esto mantiene la imagen dentro de los bordes al hacer zoom */
-            border: 1px solid rgba(255,255,255,0.05); /* Borde sutil inicial */
+            overflow: hidden; /* Mantiene la imagen dentro del cuadro al hacer zoom */
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Imagen */
+        /* Imagen del Producto */
         .card-img { 
             width: 100%; 
             height: 400px; 
             object-fit: cover; 
-            filter: grayscale(30%) brightness(0.9); /* Un poco oscura y desaturada al inicio */
-            transition: all 0.6s ease; /* Transición lenta y elegante */
+            filter: grayscale(30%) brightness(0.9); /* Ligeramente oscura por defecto */
+            transition: all 0.6s ease; 
         }
 
-        /* Efecto Hover (Cuando pasas el mouse) */
+        /* Animación Hover (El efecto Pro) */
         .card:hover { 
-            transform: translateY(-10px); /* Sube un poco más */
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); /* Resplandor dorado sutil */
-            border-color: rgba(212, 175, 55, 0.3); /* Borde dorado tenue */
+            transform: translateY(-10px); /* Levitar */
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); /* Resplandor dorado suave */
+            border-color: rgba(212, 175, 55, 0.3); 
         }
 
         .card:hover .card-img { 
-            transform: scale(1.05); /* Zoom leve (5%) */
-            filter: grayscale(0%) brightness(1.1); /* Full color y luz extra */
+            transform: scale(1.05); /* Zoom lento */
+            filter: grayscale(0%) brightness(1.1); /* Color completo y brillo */
         }
 
         .card-info { padding: 25px 20px; text-align: center; position: relative; z-index: 2; background: var(--card-bg); }
         .card-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .card-price { color: var(--accent-gold); font-size: 0.9rem; font-weight: 300; margin-bottom: 15px; display: block; }
-        /* --------------------------------------------------------- */
 
-        /* NEWSLETTER & SOCIAL */
+        /* --- NEWSLETTER --- */
         .newsletter {
             padding: 100px 20px;
             text-align: center;
@@ -186,11 +205,11 @@
         .social-icons a { color: var(--text-main); transition: 0.3s; }
         .social-icons a:hover { color: var(--accent-gold); transform: scale(1.1); }
 
-        /* FOOTER */
+        /* --- FOOTER --- */
         footer { padding: 60px 5%; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-muted); font-size: 0.8rem; }
         .footer-logo { color: var(--text-main); font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 20px; display: inline-block; }
 
-        /* CART SIDEBAR */
+        /* --- CARRITO (Sidebar) --- */
         .cart-sidebar {
             position: fixed;
             top: 0;
@@ -227,9 +246,10 @@
         }
         .cart-overlay.active { display: block; }
 
+        /* Responsive Móvil */
         @media(max-width: 768px) {
             .hero-content h1 { font-size: 2rem; }
-            .nav-links { display: none; }
+            .nav-links { display: none; } /* Ocultar menú en móvil para simplificar */
             .founder { flex-direction: column; }
             .cart-sidebar { width: 100%; }
         }
@@ -304,30 +324,34 @@
             <h3>Colección 2026</h3>
         </div>
         <div class="grid">
+            
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1516257984-b1b4d8c9230e?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Camiseta">
+                <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=774&auto=format&fit=crop" class="card-img" alt="Camiseta Heavyweight">
                 <div class="card-info">
                     <h4 class="card-title">Heavyweight Tee</h4>
                     <span class="card-price">$95.000 COP</span>
-                    <button class="btn-full" onclick="addToCart('Heavyweight Tee', 95000, 'https://images.unsplash.com/photo-1516257984-b1b4d8c9230e?q=80&w=687&auto=format&fit=crop')">Agregar al Carrito</button>
+                    <button class="btn-full" onclick="addToCart('Heavyweight Tee', 95000, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=774&auto=format&fit=crop')">Agregar al Carrito</button>
                 </div>
             </div>
+            
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1507680434567-5739c8a97823?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Blazer">
+                <img src="https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?q=80&w=774&auto=format&fit=crop" class="card-img" alt="Chaqueta Esencial">
                 <div class="card-info">
-                    <h4 class="card-title">Blazer Lino</h4>
+                    <h4 class="card-title">The Essential Jacket</h4>
                     <span class="card-price">$450.000 COP</span>
-                    <button class="btn-full" onclick="addToCart('Blazer Lino', 450000, 'https://images.unsplash.com/photo-1507680434567-5739c8a97823?q=80&w=687&auto=format&fit=crop')">Agregar al Carrito</button>
+                    <button class="btn-full" onclick="addToCart('The Essential Jacket', 450000, 'https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?q=80&w=774&auto=format&fit=crop')">Agregar al Carrito</button>
                 </div>
             </div>
+            
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1551488852-081bd4c9a646?q=80&w=687&auto=format&fit=crop" class="card-img" alt="Pantalón">
+                <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=796&auto=format&fit=crop" class="card-img" alt="Pantalón Sastre">
                 <div class="card-info">
-                    <h4 class="card-title">Pantalón Recto</h4>
+                    <h4 class="card-title">Tailored Trouser</h4>
                     <span class="card-price">$220.000 COP</span>
-                    <button class="btn-full" onclick="addToCart('Pantalón Recto', 220000, 'https://images.unsplash.com/photo-1551488852-081bd4c9a646?q=80&w=687&auto=format&fit=crop')">Agregar al Carrito</button>
+                    <button class="btn-full" onclick="addToCart('Tailored Trouser', 220000, 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=796&auto=format&fit=crop')">Agregar al Carrito</button>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -356,13 +380,19 @@
     </footer>
 
     <script>
-        // 1. Cuenta Regresiva
+        // 1. Cuenta Regresiva (Fecha: 1 Enero 2026)
         const launchDate = new Date("Jan 1, 2026 00:00:00").getTime();
         setInterval(function() {
             const now = new Date().getTime();
             const distance = launchDate - now;
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            if (distance > 0) {
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            } else {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+            }
         }, 1000);
 
         // 2. Lógica del Carrito
@@ -376,7 +406,7 @@
         function addToCart(name, price, img) {
             cart.push({name, price, img});
             updateCartUI();
-            toggleCart(); // Abrir carrito al agregar
+            toggleCart(); // Abre el carrito automáticamente al añadir
         }
 
         function removeFromCart(index) {
@@ -389,15 +419,15 @@
             const count = document.getElementById('cartCount');
             const totalDisplay = document.getElementById('cartTotal');
             
-            // Actualizar contador
+            // Actualizar número en el icono
             count.innerText = cart.length;
 
-            // Calcular total
+            // Calcular precio total
             let total = 0;
             cart.forEach(item => total += item.price);
             totalDisplay.innerText = "$" + total.toLocaleString('es-CO') + " COP";
 
-            // Renderizar items
+            // Mostrar los productos
             container.innerHTML = '';
             if (cart.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #555; margin-top: 20px;">Tu bolsa está vacía.</p>';
@@ -417,14 +447,14 @@
             }
         }
 
-        // 3. Checkout por WhatsApp
+        // 3. Checkout (Envío de Pedido a WhatsApp)
         function checkoutWhatsApp() {
             if (cart.length === 0) return alert("Tu carrito está vacío");
 
-            // TU NÚMERO DE WHATSAPP REAL
+            // TU NÚMERO DE WHATSAPP
             const phoneNumber = "573209247296"; 
 
-            let message = "Hola LAYRON, quiero comprar los siguientes artículos:%0A%0A";
+            let message = "Hola *LAYRON*, estoy interesado en pre-ordenar los siguientes artículos:%0A%0A";
             let total = 0;
 
             cart.forEach(item => {
@@ -432,7 +462,8 @@
                 total += item.price;
             });
 
-            message += `%0A*TOTAL: $${total.toLocaleString('es-CO')} COP*`;
+            message += `%0A*TOTAL A PAGAR: $${total.toLocaleString('es-CO')} COP*`;
+            message += `%0A%0AQuedo atento a los medios de pago. Gracias.`;
             
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
