@@ -21,7 +21,7 @@
             --bg-color: #050505;
             --card-bg: #111111;
             --text-main: #ffffff;
-            --text-muted: #d0d0d0; /* Blanco un poco apagado para contraste */
+            --text-muted: #d0d0d0;
             --accent-gold: #D4AF37;
             --font-heading: 'Cinzel', serif;
             --font-body: 'Lato', sans-serif;
@@ -177,63 +177,73 @@
             padding: 15px 25px; width: 350px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; outline: none; transition: 0.3s;
         }
         .newsletter input:focus { border-color: var(--accent-gold); }
+        
         .social-icons { margin-top: 50px; display: flex; justify-content: center; gap: 40px; }
         .social-icons a { 
             color: #ffffff; font-size: 1.8rem; transition: 0.3s; width: 50px; height: 50px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;
         }
         .social-icons a:hover { color: var(--bg-color); background: var(--accent-gold); border-color: var(--accent-gold); transform: translateY(-5px); }
 
-        /* --- MODAL (REDDISEÑO DE LUJO) --- */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.98); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.4s ease; }
-        .modal.active { display: flex; opacity: 1; }
-        .modal-content { 
-            background: #0f0f0f; width: 95%; max-width: 1100px; display: flex; 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            box-shadow: 0 0 100px rgba(0, 0, 0, 0.9); 
-            animation: modalUp 0.5s ease forwards;
+        /* --- MODAL (TAMAÑO Y SEPARACIÓN AJUSTADOS) --- */
+        .modal { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: rgba(0, 0, 0, 0.95); z-index: 3000; 
+            justify-content: center; align-items: center; 
+            backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.4s ease; 
         }
+        .modal.active { display: flex; opacity: 1; }
+        
+        .modal-content { 
+            background: #0f0f0f; 
+            width: 80%; /* MENOS ANCHO (Antes 95%) */
+            max-width: 900px; /* MENOS ANCHO MÁXIMO (Antes 1100px) */
+            display: flex; 
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Borde sutil */
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8); 
+            animation: modalUp 0.5s ease forwards;
+            border-radius: 4px; /* Bordes suaves */
+            overflow: hidden;
+        }
+        
         @keyframes modalUp { from { transform: translateY(50px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
         
-        .modal-left { flex: 1.2; height: 600px; position: relative; }
+        .modal-left { flex: 1; height: 550px; position: relative; }
         .modal-left img { width: 100%; height: 100%; object-fit: cover; }
         
         .modal-right { 
-            flex: 1; padding: 60px; 
+            flex: 1; padding: 50px; /* Buen espacio interno */
             display: flex; flex-direction: column; justify-content: center; 
             position: relative; background: radial-gradient(circle at top right, #1a1a1a 0%, #0f0f0f 60%);
         }
         
-        .close-modal { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #ffffff; cursor: pointer; transition: 0.3s; z-index: 10; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: #ffffff; cursor: pointer; transition: 0.3s; z-index: 10; }
         .close-modal:hover { color: var(--accent-gold); transform: rotate(90deg); }
         
         .modal-title { 
-            font-family: var(--font-heading); font-size: 2.8rem; margin-bottom: 10px; color: white; line-height: 1.1; 
+            font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 10px; color: white; line-height: 1.1; 
             text-transform: uppercase; letter-spacing: 2px;
         }
         
         .modal-price { 
-            font-size: 1.4rem; color: var(--accent-gold); margin-bottom: 5px; display: block; font-weight: 300; letter-spacing: 1px; 
+            font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 5px; display: block; font-weight: 300; letter-spacing: 1px; 
         }
         
-        /* SEPARADOR DE ORO */
-        .modal-divider { width: 60px; height: 2px; background: var(--accent-gold); margin: 25px 0; }
+        .modal-divider { width: 60px; height: 2px; background: var(--accent-gold); margin: 20px 0; }
         
         .modal-desc { 
-            color: #d0d0d0; line-height: 1.8; margin-bottom: 35px; font-size: 1rem; font-weight: 300;
+            color: #d0d0d0; line-height: 1.8; margin-bottom: 25px; font-size: 0.95rem; font-weight: 300;
         }
         
-        /* GRID DE ESPECIFICACIONES */
         .modal-specs { 
             display: grid; grid-template-columns: 1fr 1fr; gap: 15px; 
-            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; margin-bottom: 35px; 
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-bottom: 30px; 
         }
         .modal-specs li { 
-            color: #aaaaaa; font-size: 0.8rem; list-style: none; display: flex; align-items: center; 
+            color: #aaaaaa; font-size: 0.75rem; list-style: none; display: flex; align-items: center; 
             text-transform: uppercase; letter-spacing: 1px; font-weight: 400;
         }
-        /* CUADRADO DORADO EN LA LISTA */
         .modal-specs li::before { 
-            content: ''; width: 6px; height: 6px; background: var(--accent-gold); margin-right: 12px; display: block; 
+            content: ''; width: 5px; height: 5px; background: var(--accent-gold); margin-right: 10px; display: block; 
         }
 
         .btn { padding: 15px 40px; border: 1px solid var(--text-main); background: transparent; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; display: inline-block; }
@@ -266,10 +276,10 @@
         @media(max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
-            .modal-content { flex-direction: column; height: 100vh; overflow-y: scroll; }
+            .modal-content { flex-direction: column; height: 100vh; overflow-y: scroll; width: 100%; border: none; }
             .modal-left { height: 350px; flex: none; }
             .modal-right { padding: 30px; }
-            .modal-title { font-size: 2rem; }
+            .modal-title { font-size: 1.8rem; }
             .modal-specs { grid-template-columns: 1fr; }
             .time-box span { font-size: 2.5rem; }
             .newsletter input { width: 100%; margin-bottom: 15px; }
@@ -465,7 +475,7 @@
             }
         }
 
-        // 2. DATOS PRODUCTOS (DESCRIPCIONES MEJORADAS)
+        // 2. DATOS PRODUCTOS
         const productsDB = {
             'tee': { 
                 name: "Heavyweight Tee", 
