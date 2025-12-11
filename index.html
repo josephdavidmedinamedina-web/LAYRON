@@ -51,7 +51,13 @@
 
         /* LOGO CONTAINER */
         .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-        .logo-img { height: 45px; width: auto; mix-blend-mode: screen; /* Truco para quitar fondo negro */ }
+        .logo-img { 
+            height: 50px; 
+            width: auto; 
+            /* Este filtro ayuda a eliminar el fondo negro si la imagen es simple, 
+               pero si tu imagen ya es cuadrada negra, se integrará bien con el fondo oscuro */
+            border-radius: 2px;
+        }
         .logo-text { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 6px; font-weight: 600; color: var(--text-main); text-transform: uppercase; }
 
         .nav-right { display: flex; align-items: center; gap: 40px; }
@@ -87,16 +93,21 @@
             opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
         }
         .hero-btn-container { pointer-events: auto; }
+        
+        /* 3D */
         spline-viewer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; filter: brightness(0.9) contrast(1.05); }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- MARQUEE --- */
+        /* --- MARQUEE (CINTA) --- */
         .marquee { 
-            background: #080808; color: var(--text-main); padding: 15px 0; overflow: hidden; white-space: nowrap; 
-            position: relative; z-index: 5; border-top: 1px solid rgba(212, 175, 55, 0.1); border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            background: #050505; color: #cccccc; /* Gris profesional */
+            padding: 15px 0; overflow: hidden; white-space: nowrap; 
+            position: relative; z-index: 5; 
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
-        .marquee-item { font-family: var(--font-body); font-weight: 400; text-transform: uppercase; margin: 0 50px; letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8; }
+        .marquee-item { font-family: var(--font-body); font-weight: 400; text-transform: uppercase; margin: 0 50px; letter-spacing: 3px; font-size: 0.8rem; opacity: 0.9; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* --- SCROLL REVEAL --- */
@@ -129,7 +140,7 @@
             background-size: cover; filter: grayscale(100%); border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 10px 10px 0px rgba(212, 175, 55, 0.05);
         }
 
-        /* --- MOODBOARD (ACTUALIZADO) --- */
+        /* --- MOODBOARD (IMÁGENES NUEVAS Y FUNCIONALES) --- */
         .moodboard { padding: 0; display: flex; flex-wrap: wrap; }
         .mood-item { flex: 1 1 25%; height: 400px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
         .mood-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2); transition: 0.5s ease; }
@@ -325,19 +336,19 @@
 
     <section class="moodboard reveal">
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1494959764136-6be9eb3c261e?q=80&w=1740&auto=format&fit=crop" class="mood-img" alt="Inspiración">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop" class="mood-img" alt="Inspiración">
             <div class="mood-overlay">ESTILO</div>
         </div>
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1550614000-4b9519e02a48?q=80&w=1622&auto=format&fit=crop" class="mood-img" alt="Textura">
+            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop" class="mood-img" alt="Textura">
             <div class="mood-overlay">MATERIA</div>
         </div>
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad2dc?q=80&w=1587&auto=format&fit=crop" class="mood-img" alt="Arquitectura">
+            <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=2070&auto=format&fit=crop" class="mood-img" alt="Arquitectura">
             <div class="mood-overlay">ESTRUCTURA</div>
         </div>
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1664&auto=format&fit=crop" class="mood-img" alt="Visión">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop" class="mood-img" alt="Visión">
             <div class="mood-overlay">VISIÓN</div>
         </div>
     </section>
