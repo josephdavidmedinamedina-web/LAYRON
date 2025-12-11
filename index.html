@@ -31,51 +31,100 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: var(--font-body);
-            overflow-x: hidden; /* Evita scroll horizontal no deseado */
+            overflow-x: hidden;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
         button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
 
-        /* --- BARRA DE NAVEGACIÓN --- */
+        /* --- NUEVA BARRA DE NAVEGACIÓN (PRO LUXURY) --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 5%;
+            padding: 25px 6%; /* Más espacio lateral para elegancia */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 5, 5, 0.95); /* Casi negro solido */
-            backdrop-filter: blur(10px);
+            
+            /* EFECTO CRISTAL (GLASSMORPHISM) */
+            background: rgba(5, 5, 5, 0.7); /* Transparente */
+            backdrop-filter: blur(12px); /* Desenfoque del fondo */
+            -webkit-backdrop-filter: blur(12px);
+            
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.08); /* Borde sutil */
+            transition: all 0.4s ease;
         }
-        .logo { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 4px; font-weight: 600; }
+
+        .logo { 
+            font-family: var(--font-heading); 
+            font-size: 1.8rem; 
+            letter-spacing: 6px; /* Espaciado editorial */
+            font-weight: 600; 
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
         
-        .nav-right { display: flex; align-items: center; gap: 30px; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: var(--text-muted); }
-        .nav-links a:hover { color: var(--accent-gold); }
+        .nav-right { display: flex; align-items: center; gap: 40px; }
+        .nav-links { display: flex; gap: 35px; }
+
+        /* Enlaces del menú */
+        .nav-links a { 
+            position: relative; 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            letter-spacing: 2.5px; 
+            color: #cccccc; 
+            font-weight: 400;
+            padding-bottom: 5px;
+        }
+
+        /* Animación de la línea dorada al pasar el mouse */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--accent-gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover { color: white; }
+        .nav-links a:hover::after { width: 100%; }
 
         /* Icono del Carrito */
-        .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; color: var(--text-main); }
-        .cart-icon:hover { color: var(--accent-gold); }
+        .cart-icon { 
+            position: relative; 
+            cursor: pointer; 
+            font-size: 1.1rem; 
+            color: var(--text-main); 
+            transition: transform 0.3s;
+        }
+        .cart-icon:hover { 
+            transform: scale(1.1); 
+            color: var(--accent-gold); 
+        }
+
         .cart-count {
             position: absolute;
-            top: -8px;
+            top: -6px;
             right: -8px;
             background: var(--accent-gold);
             color: black;
-            font-size: 0.7rem;
-            width: 18px;
-            height: 18px;
+            font-size: 0.6rem;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
+            font-weight: 700;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
         }
 
         /* --- HERO (Banner Principal) --- */
@@ -126,7 +175,7 @@
         }
         .btn-full:hover { background: var(--accent-gold); color: black; }
 
-        /* --- CUENTA REGRESIVA (VERSIÓN IDEA 1: ORO + LUZ) --- */
+        /* --- CUENTA REGRESIVA (METÁLICA + LUZ) --- */
         .countdown-section {
             padding: 100px 20px;
             text-align: center;
@@ -136,7 +185,6 @@
             position: relative;
         }
         
-        /* Línea decorativa superior */
         .countdown-section::before {
             content: '';
             position: absolute;
@@ -178,14 +226,13 @@
         .time-box span { 
             display: block; 
             font-family: var(--font-heading); 
-            font-size: 4rem; /* Tamaño Pro */
+            font-size: 4rem; 
             line-height: 1;
             font-weight: 600;
-            /* El degradado mágico */
             background: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.5)); /* Sombra 3D */
+            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.5));
             margin-bottom: 15px;
         }
 
