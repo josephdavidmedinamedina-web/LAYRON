@@ -40,18 +40,23 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
 
-        /* --- NAV PRO --- */
+        /* --- NAV PRO CON LUZ DORADA --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 15px 6%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px);
+            background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px); z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
+            
+            /* EFECTO LUZ DORADA CÁLIDA EN EL BORDE */
+            border-bottom: 1px solid var(--accent-gold);
+            box-shadow: 0 4px 15px -2px rgba(212, 175, 55, 0.3), 
+                        0 2px 6px -1px rgba(212, 175, 55, 0.5);
+            transition: 0.4s;
         }
 
         /* LOGO */
-        .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; z-index: 4001; position: relative; }
-        .logo-img { height: 45px; width: auto; mix-blend-mode: screen; /* Quita el fondo negro del JPG */ }
+        .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; z-index: 4001; }
+        .logo-img { height: 50px; width: auto; mix-blend-mode: screen; /* Quita fondo negro */ }
         .logo-text { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 6px; font-weight: 600; color: var(--text-main); text-transform: uppercase; }
 
         .nav-right { display: flex; align-items: center; gap: 40px; }
@@ -104,7 +109,7 @@
 
         /* --- MARQUEE --- */
         .marquee { 
-            background: #080808; color: var(--text-main); padding: 15px 0; overflow: hidden; white-space: nowrap; 
+            background: #080808; color: #cccccc; padding: 15px 0; overflow: hidden; white-space: nowrap; 
             position: relative; z-index: 5; border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
@@ -141,9 +146,20 @@
             background-size: cover; filter: grayscale(100%); border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 10px 10px 0px rgba(212, 175, 55, 0.05);
         }
 
-        /* --- MOODBOARD --- */
+        /* --- MOODBOARD (CON BORDES DE LUZ CÁLIDA) --- */
         .moodboard { padding: 0; display: flex; flex-wrap: wrap; }
-        .mood-item { flex: 1 1 25%; height: 400px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .mood-item { 
+            flex: 1 1 25%; height: 400px; position: relative; overflow: hidden; 
+            border: 1px solid rgba(212, 175, 55, 0.3); /* Borde dorado sutil base */
+            transition: 0.3s;
+        }
+        /* El efecto de luz cálida en los bordes */
+        .mood-item:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.2);
+            border-color: var(--accent-gold);
+            z-index: 10;
+        }
+        
         .mood-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2); transition: 0.5s ease; }
         .mood-item:hover .mood-img { filter: grayscale(0%); transform: scale(1.05); }
         .mood-overlay {
@@ -213,7 +229,7 @@
         }
         .social-icons a:hover { color: var(--bg-color); background: var(--accent-gold); border-color: var(--accent-gold); transform: translateY(-5px); }
 
-        /* --- MODAL FLOTANTE --- */
+        /* --- MODAL --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.4s ease; }
         .modal.active { display: flex; opacity: 1; }
         .modal-content { 
@@ -245,9 +261,6 @@
         .btn-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
         .btn-gold:hover { background: var(--accent-gold); color: var(--bg-color); }
 
-        /* --- FOOTER --- */
-        footer { padding: 50px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: #ffffff; font-size: 0.8rem; background: #050505; }
-
         /* --- CARRITO SIDEBAR --- */
         .cart-sidebar { position: fixed; top: 0; right: -400px; width: 350px; height: 100vh; background: #0f0f0f; box-shadow: -10px 0 30px rgba(0,0,0,0.8); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 2000; padding: 30px; display: flex; flex-direction: column; border-left: 1px solid rgba(255,255,255,0.05); }
         .cart-sidebar.active { right: 0; }
@@ -262,7 +275,7 @@
         @media(max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
-            .menu-toggle { display: block; } /* Mostrar hamburguesa */
+            .menu-toggle { display: block; }
             .modal-content { flex-direction: column; height: 100vh; overflow-y: scroll; width: 100%; border: none; }
             .modal-left { height: 350px; flex: none; }
             .modal-right { padding: 30px; }
@@ -281,7 +294,6 @@
             .timeline-item::after { left: 23px; }
             .timeline-item.left .timeline-phase { left: auto; right: 20px; }
             
-            /* Ajuste Nav */
             nav { padding: 15px 5%; justify-content: space-between; }
             .nav-right { gap: 20px; }
         }
@@ -395,19 +407,19 @@
 
     <section class="moodboard reveal">
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop" class="mood-img" alt="Inspiración">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop" class="mood-img" alt="Inspiración">
             <div class="mood-overlay">ESTILO</div>
         </div>
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop" class="mood-img" alt="Textura">
+            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop" class="mood-img" alt="Textura">
             <div class="mood-overlay">MATERIA</div>
         </div>
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=2070&auto=format&fit=crop" class="mood-img" alt="Arquitectura">
+            <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=800&auto=format&fit=crop" class="mood-img" alt="Arquitectura">
             <div class="mood-overlay">ESTRUCTURA</div>
         </div>
         <div class="mood-item">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop" class="mood-img" alt="Visión">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" class="mood-img" alt="Visión">
             <div class="mood-overlay">VISIÓN</div>
         </div>
     </section>
